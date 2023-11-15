@@ -6,8 +6,8 @@ def introduce_game():
     print("""
     Welcome to Perfect Darkness, you are a captured convict sent into a building under sanction. You are tasked 
     with eliminating the creature confined within the building. The foundation has not provided any tools or weapons 
-    to help in your task, armed with nothing but your wits, you must scour through the building to find any 
-    semblance of equipment to help you in your task. But be careful, the building is in complete darkness with no 
+    to help in your task, armed with nothing but your wits and flashlight, you must scour through the building to find 
+    any semblance of equipment to help you in your task. But be careful, the building is in complete darkness with no 
     hopes of seeing the creature. You must rely on the subtle sounds the creature makes as it roams around, 
     looking for prey within it's domain.
     """)
