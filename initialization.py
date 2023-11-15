@@ -105,16 +105,28 @@ def create_entity(stats, coordinates, speed, is_player):
     :postcondition: The inputted parameters are used to create a dictionary representing an entity on the board
     :return: A dictionary representing an entity is returned
     """
-    entity = {
-        'HP': stats[0],
-        'ATK': stats[1],
-        'DEF': stats[2],
-        'X': coordinates[0],
-        'Y': coordinates[1],
-        'Z': coordinates[2],
-        'SPD': speed,
-        'Player': is_player
-    }
+    if is_player:
+        entity = {
+            'HP': stats[0],
+            'ATK': stats[1],
+            'DEF': stats[2],
+            'X': coordinates[0],
+            'Y': coordinates[1],
+            'Z': coordinates[2],
+            'SPD': speed,
+        }
+    else:
+        entity = {
+            'HP': stats[0],
+            'ATK': stats[1],
+            'DEF': stats[2],
+            'X': coordinates[0],
+            'Y': coordinates[1],
+            'Z': coordinates[2],
+            'SPD': speed,
+            'Alerted': False
+        }
+
     return entity
 
 
