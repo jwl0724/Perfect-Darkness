@@ -15,7 +15,7 @@ def run_game():
 
     player = create_entity(player_stats, player_coords, 1, True)
     monster = create_entity(monster_stats, monster_coords, 2, True)
-    building = make_board(5, 3, 5)
+    building = make_board(rows, height, column)
     print(player, monster, building)
 
 
