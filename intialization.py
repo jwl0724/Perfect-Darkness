@@ -14,6 +14,7 @@ def introduce_game():
 
     print('Press enter to continue.')
     print('----------------------------------------------------------------------------')
+    input()
 
 
 def make_board(row, height, col):
@@ -118,6 +119,7 @@ def create_entity(stats, coordinates, speed, is_player):
 
 
 def main():
+    introduce_game()
     print(make_board(5, 3, 5))
     player_stats, monster_stats = (5, 3, 2), (10, 5, 2)
     player_coord, monster_coord = (0, 0, 0), (3, 2, 3)
