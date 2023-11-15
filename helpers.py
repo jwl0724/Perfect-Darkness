@@ -12,3 +12,8 @@ def enforced_input(input_message, valid_input_list):
         player_input = input(input_message)
 
     return player_input
+
+
+def change_board_event(board, coordinate, new_event, description):
+    board[coordinate]['Event'] = new_event
+    board[coordinate]['Description'] = description
