@@ -40,5 +40,17 @@ def process_take(player, board):
     return False
 
 
+def process_move():
+    pass
+
+
+def process_flash():
+    pass
+
+
+def process_listen():
+    pass
+
+
 def get_direction():
     valid_direction = ('n', 's', 'e', 'w', 'up', 'down')
