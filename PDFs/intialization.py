@@ -78,5 +78,26 @@ def make_board(row, height, col):
     return board
 
 
-def create_entity(stats, coordinates, speed, name):
-    pass
+def create_entity(stats, coordinates, speed, is_player):
+    """
+    Create an entity on the board
+
+    :param stats: A tuple of integers representing stats, where indices 0, 1, 2 represent HP, ATK, DEF respectively
+    :param coordinates: A tuple of integers representing coordinates, in (x, y, z) format
+    :param speed: An integer representing how much steps the entity moves per turn
+    :param is_player: A boolean indicating whether the entity is a player or not
+    :precondition: stats, coordinates must be in the correct format, speed can only be 1 or 2
+    :postcondition: The inputted parameters are used to create a dictionary representing an entity on the board
+    :return: A dictionary representing an entity is returned
+    """
+    entity = {
+        'HP': stats[0],
+        'ATK': stats[1],
+        'DEF': stats[2],
+        'X': coordinates[0],
+        'Y': coordinates[1],
+        'Z': coordinates[2],
+        'SPD': speed,
+        'Type': is_player
+    }
+    return entity
