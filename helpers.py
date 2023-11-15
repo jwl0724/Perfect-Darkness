@@ -12,3 +12,7 @@ def enforced_input(input_message, valid_input_list):
         player_input = input(input_message)
 
     return player_input
+
+
+def action_matches_event(player_input, board):
+    pass
