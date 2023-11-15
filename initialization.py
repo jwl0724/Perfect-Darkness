@@ -13,7 +13,7 @@ def introduce_game():
     """)
 
     print('Press enter to continue.')
-    print('----------------------------------------------------------------------------')
+    print('-' * 10)
     input()
 
 
