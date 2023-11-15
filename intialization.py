@@ -112,7 +112,7 @@ def create_entity(stats, coordinates, speed, is_player):
         'Y': coordinates[1],
         'Z': coordinates[2],
         'SPD': speed,
-        'Type': is_player
+        'Player': is_player
     }
     return entity
 
