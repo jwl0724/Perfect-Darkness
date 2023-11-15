@@ -23,13 +23,21 @@ def get_action_input():
         player_input = helpers.enforced_input('Input: ', valid_action)
         if player_input == 'help':
             print("""
-            Take - Spend a turn to take an item
+            Take - Spend a turn to take an item, with a 5% chance of failing
             Move - Spend a turn to move in a direction
             Listen - Spend a turn to focus listening to estimate where the monster is
             Flash - Spend a turn to get exact location of the monster, also alerts the monster to your location
             """)
         elif player_input in valid_action:
             return player_input
+
+
+def process_take(player, board):
+    board_event = board[(player['X'], player['Y'], player['Z'])]['Event']
+    if board_event == 'Salvage':
+        return True
+
+    return False
 
 
 def get_direction():
