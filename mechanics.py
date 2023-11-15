@@ -40,15 +40,15 @@ def process_take(player, board):
     return False
 
 
-def process_move():
+def process_move(player, board):
     pass
 
 
-def process_flash():
+def process_flash(monster):
     pass
 
 
-def process_listen():
+def process_listen(player, monster):
     pass
 
 

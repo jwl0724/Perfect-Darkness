@@ -30,13 +30,13 @@ def run_game():
                     break
 
             elif player_input == 'move':
-                process_move()
+                process_move(player, building)
 
             elif player_input == 'listen':
-                process_listen()
+                process_listen(player, monster)
 
             elif player_input == 'flash':
-                process_flash()
+                process_flash(monster)
 
 
 def main():
