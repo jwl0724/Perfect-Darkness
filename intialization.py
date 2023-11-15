@@ -48,7 +48,7 @@ def make_board(row, height, col):
                 random_number_event = random.randint(1, 100)
 
                 # for stairs events
-                if helpers.is_between(random_number_event, 1, 10) and y != 2:
+                if helpers.is_between(random_number_event, 1, 10) and y != height - 1:
                     description = 'You feel out some railings, these must be stairs.'
                     board[coordinates] = {'Event': possible_event_types[2], 'Description': description}
 
@@ -69,11 +69,25 @@ def make_board(row, height, col):
                     board[coordinates] = {'Event': possible_event_types[1],
                                           'Description': possible_none_event_descriptions[random_number_none]}
 
-    # create stairs and holes at set locations, in case random doesn't generate any
-    board[(0, 0, 0)] = {'Event': 'Stairs', 'Description': 'You feel some steps in the darkness, these must be stairs.'}
-    board[(2, 1, 3)] = {'Event': 'Stairs', 'Description': 'You feel some rungs, it must be a ladder.'}
-    board[(2, 1, 3)] = {'Event': 'Hole', 'Description': 'You hear settling debris below, there must be a hole here.'}
-    board[(3, 2, 4)] = {'Event': 'Hole', 'Description': 'You almost trip into nothingness, you could descend here.'}
+    # create guaranteed hole and stairs in case random doesn't generate any
+    for y in range(height):
+        random_x = random.randint(0, row)
+        random_z = random.randint(0, col)
+
+        if y == 0:
+            board[(random_x, y, random_z)] = \
+                {'Event': 'Stairs', 'Description': 'You feel some rungs, it must be a ladder.'}
+
+        elif y == height - 1:
+            board[(random_x, y, random_z)] = \
+                {'Event': 'Hole', 'Description': 'You hear settling debris below, there must be a hole here.'}
+
+        else:
+            board[(random_x, y, random_z)] = \
+                {'Event': 'Stairs', 'Description': 'You feel some steps in the darkness, these must be stairs.'}
+
+            board[(random_x * 2 % row), y, random_z * 2 % col] = \
+                {'Event': 'Hole', 'Description': 'You almost trip into nothingness, you could descend here.'}
 
     return board
 
@@ -101,3 +115,17 @@ def create_entity(stats, coordinates, speed, is_player):
         'Type': is_player
     }
     return entity
+
+
+def main():
+    print(make_board(5, 3, 5))
+    player_stats, monster_stats = (5, 3, 2), (10, 5, 2)
+    player_coord, monster_coord = (0, 0, 0), (3, 2, 3)
+    player = create_entity(player_stats, player_coord, 1, True)
+    monster = create_entity(monster_stats, monster_coord, 2, False)
+    print(player)
+    print(monster)
+
+
+if __name__ == '__main__':
+    main()
