@@ -91,7 +91,18 @@ def process_listen(player, monster):
         print('You pick up some faint movement on the floors above, the monster must be there...')
         return
 
-    monster_location_description = ''
+    monster_location_description = 'You pick up some faint sounds coming from '
+
+    if player['Z'] < monster['Z']:
+        monster_location_description += 'north'
+    elif player['Z'] > monster['Z']:
+        monster_location_description += 'south'
+    if player['X'] < monster['X']:
+        monster_location_description += 'west'
+    elif player['X'] > monster['X']:
+        monster_location_description += 'east'
+
+    monster_location_description += ' of you. Best to avoid that place for now...'
 
     print(monster_location_description)
 
