@@ -36,7 +36,7 @@ def run_game():
                 process_listen(player, monster)
 
             elif player_input == 'flash':
-                process_flash(monster)
+                process_flash(player, monster)
 
 
 def main():
