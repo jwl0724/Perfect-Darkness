@@ -76,8 +76,30 @@ def process_move(player, board):
     pass
 
 
-def process_flash(monster):
-    pass
+def process_flash(player, monster):
+    print('You briefly flash your flashlight...')
+    if monster['Y'] != player['Y']:
+        print('You see no sign of the creature, it must be on a different floor.')
+
+    monster['Alert'] = True
+    print('You hear rabid snarling coming from the darkness, it seems you have alerted it to your presence.')
+
+    x_difference = monster['X'] - player['X']
+    z_difference = monster['Z'] - player['Z']
+
+    warning_message = f'You see the malformed creature '
+
+    if player['Z'] < monster['Z']:
+        warning_message += f'{abs(x_difference)} units north '
+    elif player['Z'] > monster['Z']:
+        warning_message += f'{abs(x_difference)} units south '
+    if player['X'] < monster['X']:
+        warning_message += f'{abs(z_difference)} units west '
+    elif player['X'] > monster['X']:
+        warning_message += f'{abs(z_difference)} units east '
+
+    warning_message += 'of you.'
+    print(warning_message)
 
 
 def process_listen(player, monster):
