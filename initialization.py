@@ -124,7 +124,8 @@ def create_entity(stats, coordinates, speed, is_player):
             'Y': coordinates[1],
             'Z': coordinates[2],
             'SPD': speed,
-            'Alerted': False
+            'Alerted': False,
+            'Alert Counter': 0
         }
 
     return entity
