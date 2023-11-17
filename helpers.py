@@ -8,7 +8,7 @@ def is_between(number, lower_bound, upper_bound):
 def enforced_input(input_message, valid_input_list):
     player_input = input(input_message).strip().lower()
     while player_input not in valid_input_list:
-        print('Invalid command, type help for a list of commands')
+        print('Invalid input, type help for a list of valid inputs')
         player_input = input(input_message)
 
     return player_input
