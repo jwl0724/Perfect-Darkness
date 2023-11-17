@@ -10,7 +10,7 @@ def is_alive(entity):
 
 
 def describe_location(player, board):
-    description = board[(player['X'], player['Y'], player['Z'])]
+    description = board[(player['X'], player['Y'], player['Z'])]['Description']
     print(description)
 
 
@@ -46,11 +46,12 @@ def process_take(player, board):
     player_coords = (player['X'], player['Y'], player['Z'])
     board_event = board[player_coords]['Event']
     if board_event != 'Salvage':
+        print('There\'s nothing to take.')
         return False
 
     random_number = random.randint(1, 20)
     if random_number == 4:
-        print('You tried to grab the item, but fumbled in the darkness. The item is now lost into void of darkness')
+        print('You tried to grab the item, but fumbled in the darkness. The item is now lost into void of darkness.')
         return True
 
     # possible items: lid, bottle, knife, scissor, gun, armor
@@ -74,7 +75,7 @@ def process_take(player, board):
 
 
 def process_move(player, board):
-    pass
+
 
 
 def process_flash(player, monster):
@@ -85,22 +86,23 @@ def process_flash(player, monster):
     monster['Alert'] = True
     print('You hear rabid snarling coming from the darkness, it seems you have alerted it to your presence.')
 
-    x_difference = monster['X'] - player['X']
-    z_difference = monster['Z'] - player['Z']
-
-    warning_message = f'You see the malformed creature '
-
-    if player['Z'] < monster['Z']:
-        warning_message += f'{abs(x_difference)} units north '
-    elif player['Z'] > monster['Z']:
-        warning_message += f'{abs(x_difference)} units south '
-    if player['X'] < monster['X']:
-        warning_message += f'{abs(z_difference)} units west '
-    elif player['X'] > monster['X']:
-        warning_message += f'{abs(z_difference)} units east '
-
-    warning_message += 'of you.'
-    print(warning_message)
+    # pending to be removed, will print out a map with monster on the board in tkinter later
+    # x_difference = monster['X'] - player['X']
+    # z_difference = monster['Z'] - player['Z']
+    #
+    # warning_message = f'You see the malformed creature '
+    #
+    # if player['Z'] < monster['Z']:
+    #     warning_message += f'{abs(x_difference)} units north '
+    # elif player['Z'] > monster['Z']:
+    #     warning_message += f'{abs(x_difference)} units south '
+    # if player['X'] < monster['X']:
+    #     warning_message += f'{abs(z_difference)} units west '
+    # elif player['X'] > monster['X']:
+    #     warning_message += f'{abs(z_difference)} units east '
+    #
+    # warning_message += 'of you.'
+    # print(warning_message)
 
 
 def process_listen(player, monster):
@@ -129,5 +131,7 @@ def process_listen(player, monster):
 
     print(monster_location_description)
 
+
 def get_direction():
-    valid_direction = ('n', 's', 'e', 'w', 'up', 'down')
+    # valid_direction = ('n', 's', 'e', 'w', 'up', 'down')
+    pass
