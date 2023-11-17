@@ -75,7 +75,21 @@ def process_take(player, board):
 
 
 def process_move(player, board):
+    valid_direction = ('n', 's', 'e', 'w', 'up', 'down', 'help')
+    player_not_moved = True
 
+    while player_not_moved:
+        direction = helpers.enforced_input('Which direction would you like to move? (N, S, E, W)', valid_direction)
+        if direction == 'help':
+            print('Valid directions include: N, S, E, W, Up, Down')
+        if direction == 'up' and board[(player['X'], player['Y'], player['Z'])]['Event'] != 'Stairs':
+            print('There\'s nothing to climb up from.')
+        elif direction == 'down' and board[(player['X'], player['Y'], player['Z'])]['Event'] != 'Hole':
+            print('There\'s no hole to jump into.')
+        elif helpers.out_of_bounds(player, board, direction):
+            print('You moved into a wall... Try again.')
+        else:
+            player_not_moved = False
 
 
 def process_flash(player, monster):
@@ -130,8 +144,3 @@ def process_listen(player, monster):
     monster_location_description += ' of you. Best to avoid that place for now...'
 
     print(monster_location_description)
-
-
-def get_direction():
-    # valid_direction = ('n', 's', 'e', 'w', 'up', 'down')
-    pass
