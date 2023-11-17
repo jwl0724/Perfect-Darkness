@@ -17,3 +17,12 @@ def enforced_input(input_message, valid_input_list):
 def change_board_event(board, coordinate, new_event, description):
     board[coordinate]['Event'] = new_event
     board[coordinate]['Description'] = description
+
+def out_of_bounds(entity, board, direction):
+    direction_key = {'n': 1, 's': -1, 'e': -1, 'w': 1}
+    board_row = list(board.keys())[-1][0]
+    board_height = list(board.keys())[-1][1]
+    board_col = list(board.keys())[-1][2]
+
+    if direction == 'n' or direction == 's':
+        if entity['Z']
