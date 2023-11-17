@@ -41,7 +41,7 @@ def process_take(player, board):
     :precondition: player and board must be valid representations of their respective objects in the correct format
     :postcondition: After taking an item, the player's stats will increase based on what was taken
     :poscondition: The board at the coordinates will be changed to none-type event
-    :return: A boolean value, returns True if an item was taken, False otherwise
+    :return: A boolean value, returns True if an item was removed from the board, False otherwise
     """
     player_coords = (player['X'], player['Y'], player['Z'])
     board_event = board[player_coords]['Event']
@@ -51,6 +51,7 @@ def process_take(player, board):
     random_number = random.randint(1, 20)
     if random_number == 4:
         print('You tried to grab the item, but fumbled in the darkness. The item is now lost into void of darkness')
+        return True
 
     # possible items: lid, bottle, knife, scissor, gun, armor
     atk_booster = ['bottle', 'knife', 'gun', 'scissor']
