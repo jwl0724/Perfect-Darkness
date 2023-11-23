@@ -25,11 +25,13 @@ def out_of_bounds(entity, board, direction):
     board_col = list(board.keys())[-1][2]
 
     if direction == 'n' or direction == 's':
-        if entity['Z'] + direction_key[direction] > board_col or entity['Z'] + direction_key[direction] < 0:
+        new_position = entity['Z'] + direction_key[direction]
+        if new_position > board_col or new_position < 0:
             return True
 
     if direction == 'e' or direction == 'w':
-        if entity['X'] + direction_key[direction] > board_row or entity['X'] + direction_key[direction] < 0:
+        new_position = entity['X'] + direction_key[direction]
+        if new_position > board_row or new_position < 0:
             return True
 
     return False
