@@ -38,7 +38,8 @@ def run_game():
             elif player_input == 'flash':
                 process_flash(player, monster)
 
-
+            print(player['X'], player['Y'], player['Z'])
+            describe_location(player, building)
 def main():
     run_game()
 
