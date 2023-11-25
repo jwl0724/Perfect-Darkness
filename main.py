@@ -1,6 +1,6 @@
 from initialization import *
 from mechanics import *
-import random
+import input
 
 
 def run_game():
@@ -29,17 +29,17 @@ def run_game():
             player_input = helpers.enforced_input('Input: ', VALID_ACTIONS)
             match player_input:
                 case 'help':
-                    process_help()
+                    input.process_help()
                     continue
                 case 'take':
-                    if not process_take(player, building):
+                    if not input.process_take(player, building):
                         continue
                 case 'move':
-                    process_move(player, building)
+                    input.process_move(player, building)
                 case 'listen':
-                    process_listen(player, monster)
+                    input.process_listen(player, monster)
                 case 'flash':
-                    process_flash(player, monster)
+                    input.process_flash(player, monster)
             break
 
         print(player['X'], player['Y'], player['Z'])
