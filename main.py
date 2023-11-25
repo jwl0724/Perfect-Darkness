@@ -24,6 +24,9 @@ def run_game():
         # process input
         while True:
             player_input = get_action_input()
+            if player_input == 'help':
+                process_help()
+                continue
 
             if player_input == 'take':
                 if process_take(player, building):
@@ -40,6 +43,8 @@ def run_game():
 
             print(player['X'], player['Y'], player['Z'])
             describe_location(player, building)
+
+
 def main():
     run_game()
 
