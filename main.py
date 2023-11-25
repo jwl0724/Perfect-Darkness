@@ -1,5 +1,7 @@
-from initialization import *
-from mechanics import *
+import initialization as init
+import mechanics as mech
+import monster as mon
+import helpers
 import input
 
 
@@ -15,15 +17,15 @@ def run_game():
     # set constants
     VALID_ACTIONS = ('help', 'take', 'move', 'listen', 'flash')
 
-    # intialize the game
-    introduce_game()
-    player = create_entity(player_stats, player_coords, 1, True)
-    monster = create_entity(monster_stats, monster_coords, 2, False)
-    building = make_board(rows, height, column)
+    # initialize the game
+    init.introduce_game()
+    player = init.create_entity(player_stats, player_coords, 1, True)
+    monster = init.create_entity(monster_stats, monster_coords, 2, False)
+    building = init.make_board(rows, height, column)
 
     # start the game loop
-    describe_location(player, building)
-    while is_alive(player):
+    mech.describe_location(player, building)
+    while mech.is_alive(player):
         # process input
         while True:
             player_input = helpers.enforced_input('Input: ', VALID_ACTIONS)
@@ -42,8 +44,16 @@ def run_game():
                     input.process_flash(player, monster)
             break
 
+        if (monster['X'], monster['Y'], monster['Z']) == (player['X'], player['Y'], player['Z']):
+            mech.fight(player, monster)
+
+        if not mech.is_alive(monster):
+            print('You have slain the decrepit creature.')
+            break
+
+        mon.move_monster(monster, building)
         print(player['X'], player['Y'], player['Z'])
-        describe_location(player, building)
+        mech.describe_location(player, building)
 
 
 def main():
