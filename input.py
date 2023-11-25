@@ -55,7 +55,6 @@ def process_take(player, board):
 
 def process_move(player, board):
     valid_direction = ('n', 's', 'e', 'w', 'up', 'down', 'help')
-    direction_key = {'n': 1, 's': -1, 'e': -1, 'w': 1, 'up': 1, 'down': -1}
     player_not_moved = True
 
     while player_not_moved:
@@ -70,10 +69,7 @@ def process_move(player, board):
         elif helpers.out_of_bounds(player, board, direction):
             print('You moved into a wall... Try again.')
         else:
-            player['X'] += direction_key[direction] if direction == 'e' or direction == 'w' else 0
-            player['Z'] += direction_key[direction] if direction == 'n' or direction == 's' else 0
-            player['Y'] += direction_key[direction] if direction == 'up' or direction == 'down' else 0
-            player_not_moved = False
+            helpers.move(player, direction)
 
 
 def process_flash(player, monster):
