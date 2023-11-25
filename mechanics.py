@@ -14,17 +14,6 @@ def describe_location(player, board):
     print(description)
 
 
-def get_action_input():
-    valid_action = ('help', 'take', 'move', 'listen', 'flash')
-
-    print('What would you like to do? (type help for a list of commands)')
-    # process action
-    while True:
-        player_input = helpers.enforced_input('Input: ', valid_action)
-        if player_input in valid_action:
-            return player_input
-
-
 def process_help():
     print("""
                 Take - Spend a turn to take an item, with a 5% chance of failing
