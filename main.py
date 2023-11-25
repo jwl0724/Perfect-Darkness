@@ -50,8 +50,11 @@ def run_game():
         if not mech.is_alive(monster):
             print('You have slain the decrepit creature.')
             break
-
         mon.move_monster(monster, building)
+
+        if (monster['X'], monster['Y'], monster['Z']) == (player['X'], player['Y'], player['Z']):
+            mech.fight(player, monster)
+
         print(player['X'], player['Y'], player['Z'])
         mech.describe_location(player, building)
 
