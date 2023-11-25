@@ -14,5 +14,5 @@ def describe_location(player, board):
     print(description)
 
 
-def fight():
+def fight(player, monster):
     pass
