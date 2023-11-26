@@ -70,6 +70,7 @@ def process_move(player, board):
             print('You moved into a wall... Try again.')
         else:
             helpers.move(player, direction)
+            player_not_moved = False
 
 
 def process_flash(player, monster):
