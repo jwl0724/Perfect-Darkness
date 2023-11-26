@@ -2,7 +2,7 @@ import initialization as init
 import mechanics as mech
 import monster as mon
 import helpers
-import input
+import input as ipt
 
 
 def run_game():
@@ -15,7 +15,7 @@ def run_game():
     rows, height, column = 5, 3, 5
 
     # set constants
-    VALID_ACTIONS = ('help', 'take', 'move', 'listen', 'flash')
+    VALID_ACTIONS = ('help', 'take', 'move', 'listen', 'flash', 'save', 'load')
 
     # initialize the game
     init.introduce_game()
@@ -36,26 +36,34 @@ def run_game():
             player_input = helpers.enforced_input('Input: ', VALID_ACTIONS)
             match player_input:
                 case 'help':
-                    input.process_help()
+                    ipt.process_help()
                     continue
                 case 'take':
-                    if not input.process_take(player, building):
+                    if not ipt.process_take(player, building):
                         continue
                 case 'move':
-                    input.process_move(player, building)
+                    ipt.process_move(player, building)
                 case 'listen':
-                    input.process_listen(player, monster)
+                    ipt.process_listen(player, monster)
                 case 'flash':
-                    input.process_flash(player, monster)
+                    ipt.process_flash(player, monster)
                 case 'save':
-                    input.process_save(player, monster, building)
-                    decision = helpers.enforced_input('Quit Now? (Y/N)', ['y', 'n']) == 'y'
+                    ipt.process_save(player, monster, building)
+                    decision = helpers.enforced_input('Quit Now? (Y/N): ', ['y', 'n'])
                     if decision == 'y':
                         print('Quitting now...')
                         return
                     else:
                         print('Resuming game...')
                         continue
+                case 'load':
+                    save_state = ipt.process_load()
+                    if save_state:
+                        print('Now loading...')
+                    else:
+                        print('Error, no saves found...')
+                    continue
+
             break
 
         mon.move_monster(monster, building)
