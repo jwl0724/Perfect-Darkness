@@ -7,9 +7,10 @@ def move_monster(monster, board):
     monster_not_moved = True
 
     while monster_not_moved:
+        move_unit = random.randint(1, monster['SPD'])
         direction = direction_key[random.randint(1,6)]
-        if helpers.out_of_bounds(monster, board, direction):
+        if helpers.out_of_bounds(monster, board, direction, move_unit):
             continue
 
-        helpers.move(monster, direction)
+        helpers.move(monster, direction, move_unit)
         monster_not_moved = False
