@@ -43,8 +43,8 @@ def process_take(player, board):
     for item in all_items:
         if item in board[player_coords]['Description']:
             print(f'You managed to grab the {item} without issue.')
-            player['ATK'] += 1 if item in atk_booster else 0
-            player['DEF'] += 1 if item in def_booster else 0
+            player['ATK'] += 5 if item in atk_booster else 0
+            player['DEF'] += 5 if item in def_booster else 0
 
             feedback_message = f'You now have increased offensive power with the {item}.' if item in atk_booster else\
                 f'You now take less damage thanks to your {item}'
