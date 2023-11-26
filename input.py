@@ -7,7 +7,7 @@ def process_help():
                 Take - Spend a turn to take an item, with a 5% chance of failing
                 Move - Spend a turn to move in a direction
                 Listen - Spend a turn to focus listening to estimate where the monster is
-                Flash - Spend a turn to get exact location of the monster, also alerts the monster to your location
+                Flash - Spend a turn to get your surroundings, also alerts the monster if it's on the same floor
                 Save - Save the current state of the game
                 Load - Load a previous save file
           """)
@@ -79,6 +79,7 @@ def process_flash(player, monster):
     print('You briefly flash your flashlight...')
     if monster['Y'] != player['Y']:
         print('You see no sign of the creature, it must be on a different floor.')
+        return
 
     monster['Alert'] = True
     print('You hear rabid snarling coming from the darkness, it seems you have alerted it to your presence.')
