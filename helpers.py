@@ -51,3 +51,10 @@ def move(entity, direction, speed=None):
     entity['X'] += entity_spd * direction_key[direction] if direction == 'e' or direction == 'w' else 0
     entity['Z'] += entity_spd * direction_key[direction] if direction == 'n' or direction == 's' else 0
     entity['Y'] += entity_spd * direction_key[direction] if direction == 'up' or direction == 'down' else 0
+
+
+def is_alive(entity):
+    if entity['HP'] == 0:
+        return False
+    else:
+        return True
