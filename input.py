@@ -129,3 +129,7 @@ def process_listen(player, monster):
 
 def process_save(player, monster, board):
     pass
+
+
+def process_load():
+    pass
