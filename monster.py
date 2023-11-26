@@ -12,3 +12,4 @@ def move_monster(monster, board):
             continue
 
         helpers.move(monster, direction)
+        monster_not_moved = False
