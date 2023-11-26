@@ -55,7 +55,7 @@ def process_take(player, board):
     return True
 
 
-def process_move(player, board):
+def process_move(player, monster, board):
     valid_direction = ('n', 's', 'e', 'w', 'up', 'down', 'help')
     player_not_moved = True
 
@@ -64,15 +64,24 @@ def process_move(player, board):
 
         if direction == 'help':
             print('Valid directions include: N, S, E, W, Up, Down')
+            continue
         elif direction == 'up' and board[(player['X'], player['Y'], player['Z'])]['Event'] != 'Stairs':
             print('There\'s nothing to climb up from.')
+            continue
         elif direction == 'down' and board[(player['X'], player['Y'], player['Z'])]['Event'] != 'Hole':
             print('There\'s no hole to jump into.')
+            continue
         elif helpers.out_of_bounds(player, board, direction):
             print('You moved into a wall... Try again.')
+            continue
+
+        if monster['Alerted']:
+            trip_message = 'In your panic you tripped over some debris hidden in the darkness, you failed to move.'
+            helpers.move(player, direction) if random.randint(1, 5) != 1 else print(trip_message)
         else:
             helpers.move(player, direction)
-            player_not_moved = False
+
+        player_not_moved = False
 
 
 def process_flash(player, monster):
