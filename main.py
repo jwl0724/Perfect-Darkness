@@ -49,7 +49,7 @@ def run_game():
                     if not ipt.process_take(player, building):
                         continue
                 case 'move':
-                    ipt.process_move(player, building)
+                    ipt.process_move(player, monster, building)
                 case 'listen':
                     ipt.process_listen(player, monster)
                 case 'flash':
