@@ -72,8 +72,8 @@ def make_board(row, height, col):
 
     # create guaranteed hole and stairs in case random doesn't generate any
     for y in range(height):
-        random_x = random.randint(0, row)
-        random_z = random.randint(0, col)
+        random_x = random.randint(0, row - 1)
+        random_z = random.randint(0, col - 1)
 
         if y == 0:
             board[(random_x, y, random_z)] = \
