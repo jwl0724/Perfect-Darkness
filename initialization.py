@@ -9,7 +9,7 @@ def introduce_game():
     to help in your task, armed with nothing but your wits and flashlight, you must scour through the building to find 
     any semblance of equipment to help you in your task. But be careful, the building is in complete darkness with no 
     hopes of seeing the creature. You must rely on the subtle sounds the creature makes as it roams around, 
-    looking for prey within it's domain.
+    looking for prey within it's domain. If at any point you wish to bring up a list of commands, type help.
     """)
 
     print('Press enter to continue.')
