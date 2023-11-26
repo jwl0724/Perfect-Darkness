@@ -1,3 +1,6 @@
+import math
+
+
 def is_between(number, lower_bound, upper_bound):
     if lower_bound <= number <= upper_bound:
         return True
@@ -44,10 +47,10 @@ def out_of_bounds(entity, board, direction):
     return False
 
 
-def move(entity, direction):
-    entity_spd = entity['SPD']
-    direction_key = {'n': 1, 's': -1, 'e': -1, 'w': 1, 'up': 1, 'down': -1}
+def move(entity, direction, speed=None):
+    entity_spd = speed if speed else entity['SPD']
+    dir_key = {'n': 1, 's': -1, 'e': -1, 'w': 1, 'up': 1, 'down': -1}
 
-    entity['X'] += entity_spd * direction_key[direction] if direction == 'e' or direction == 'w' else 0
-    entity['Z'] += entity_spd * direction_key[direction] if direction == 'n' or direction == 's' else 0
-    entity['Y'] += entity_spd * direction_key[direction] if direction == 'up' or direction == 'down' else 0
+    entity['X'] += entity_spd * dir_key[direction] if direction == 'e' or direction == 'w' else 0
+    entity['Z'] += entity_spd * dir_key[direction] if direction == 'n' or direction == 's' else 0
+    entity['Y'] += math.ceil(entity_spd / 2) * dir_key[direction] if direction == 'up' or direction == 'down' else 0
