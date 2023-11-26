@@ -25,11 +25,12 @@ def run_game():
 
     # start the game loop
     while mech.is_alive(player) and mech.is_alive(monster):
-        mech.describe_location(player, building)
-
-        # start fight if coordinates overlap
         if (monster['X'], monster['Y'], monster['Z']) == (player['X'], player['Y'], player['Z']):
-            mech.fight(player, monster)
+            print('The creature is right behind you...')
+        else:
+            mech.describe_location(player, building)
+
+        mon.move_monster(monster, building)
 
         # process input
         while mech.is_alive(player):
@@ -66,9 +67,12 @@ def run_game():
 
             break
 
-        mon.move_monster(monster, building)
+        # start fight if coordinates overlap
+        if (monster['X'], monster['Y'], monster['Z']) == (player['X'], player['Y'], player['Z']):
+            mech.fight(player, monster)
 
-        print(player['X'], player['Y'], player['Z'])
+        print(f'Player Coords = ({player["X"]}, {player["Y"]}, {player["Z"]})')
+        print(f'Monster Coords = ({monster["X"]}, {monster["Y"]}, {monster["Z"]})')
 
     if mech.is_alive(player):
         print('You somehow managed to defeat the creature, unfortunately the foundation has no intention of letting you go as you have seen too much. You have only staved off your execution for just a tiny bit...')
