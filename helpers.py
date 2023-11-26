@@ -1,6 +1,3 @@
-import math
-
-
 def is_between(number, lower_bound, upper_bound):
     if lower_bound <= number <= upper_bound:
         return True
@@ -22,9 +19,12 @@ def change_board_event(board, coordinate, new_event, description):
     board[coordinate]['Description'] = description
 
 
-def out_of_bounds(entity, board, direction):
+def out_of_bounds(entity, board, direction, speed=None):
     direction_key = {'n': 1, 's': -1, 'e': -1, 'w': 1, 'up': 1, 'down': -1}
-    entity_spd = entity['SPD']
+    if speed:
+        entity_spd = speed
+    else:
+        entity_spd = entity['SPD']
     board_row = list(board.keys())[-1][0]
     board_col = list(board.keys())[-1][2]
     board_height = list(board.keys())[-1][1]
@@ -53,4 +53,4 @@ def move(entity, direction, speed=None):
 
     entity['X'] += entity_spd * dir_key[direction] if direction == 'e' or direction == 'w' else 0
     entity['Z'] += entity_spd * dir_key[direction] if direction == 'n' or direction == 's' else 0
-    entity['Y'] += math.ceil(entity_spd / 2) * dir_key[direction] if direction == 'up' or direction == 'down' else 0
+    entity['Y'] += entity_spd * dir_key[direction] if direction == 'up' or direction == 'down' else 0
