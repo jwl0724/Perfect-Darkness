@@ -3,12 +3,12 @@ import helpers
 
 
 def move_monster(monster, board):
-    direction_key = {1: 'n', 2: 's', 3: 'e', 4: 'w', 5: 'up', 6: 'down'}
+    available_directions = ('n', 's', 'e', 'w', 'up', 'down')
     monster_not_moved = True
 
     while monster_not_moved:
         move_unit = random.randint(1, monster['SPD'])
-        direction = direction_key[random.randint(1, 6)]
+        direction = available_directions[random.randint(0, 5)]
         if helpers.out_of_bounds(monster, board, direction, move_unit):
             continue
 
