@@ -21,10 +21,7 @@ def change_board_event(board, coordinate, new_event, description):
 
 def out_of_bounds(entity, board, direction, speed=None):
     direction_key = {'n': 1, 's': -1, 'e': -1, 'w': 1, 'up': 1, 'down': -1}
-    if speed:
-        entity_spd = speed
-    else:
-        entity_spd = entity['SPD']
+    entity_spd = speed if speed else entity['SPD']
     board_row = list(board.keys())[-1][0]
     board_col = list(board.keys())[-1][2]
     board_height = list(board.keys())[-1][1]
