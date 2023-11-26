@@ -14,3 +14,7 @@ def move_monster(monster, board):
 
         helpers.move(monster, direction, move_unit)
         monster_not_moved = False
+
+
+def chase_player(player, monster):
+    pass
