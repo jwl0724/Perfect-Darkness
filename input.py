@@ -8,6 +8,8 @@ def process_help():
                 Move - Spend a turn to move in a direction
                 Listen - Spend a turn to focus listening to estimate where the monster is
                 Flash - Spend a turn to get exact location of the monster, also alerts the monster to your location
+                Save - Save the current state of the game
+                Load - Load a previous save file
           """)
 
 
