@@ -49,8 +49,8 @@ def out_of_bounds(entity, board, direction, speed=None):
 
 def move(entity, direction, speed=None):
     entity_spd = speed if speed else entity['SPD']
-    dir_key = {'n': 1, 's': -1, 'e': -1, 'w': 1, 'up': 1, 'down': -1}
+    direction_key = {'n': 1, 's': -1, 'e': -1, 'w': 1, 'up': 1, 'down': -1}
 
-    entity['X'] += entity_spd * dir_key[direction] if direction == 'e' or direction == 'w' else 0
-    entity['Z'] += entity_spd * dir_key[direction] if direction == 'n' or direction == 's' else 0
-    entity['Y'] += entity_spd * dir_key[direction] if direction == 'up' or direction == 'down' else 0
+    entity['X'] += entity_spd * direction_key[direction] if direction == 'e' or direction == 'w' else 0
+    entity['Z'] += entity_spd * direction_key[direction] if direction == 'n' or direction == 's' else 0
+    entity['Y'] += entity_spd * direction_key[direction] if direction == 'up' or direction == 'down' else 0
