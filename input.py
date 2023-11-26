@@ -81,7 +81,7 @@ def process_flash(player, monster):
         print('You see no sign of the creature, it must be on a different floor.')
         return
 
-    monster['Alert'] = True
+    monster['Alerted'] = True
     print('You hear rabid snarling coming from the darkness, it seems you have alerted it to your presence.')
 
     # pending to be removed, will print out a map with monster on the board in tkinter later
