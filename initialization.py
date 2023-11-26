@@ -108,6 +108,7 @@ def create_entity(stats, coordinates, speed, is_player):
     if is_player:
         entity = {
             'HP': stats[0],
+            'MAX HP': stats[0],
             'ATK': stats[1],
             'DEF': stats[2],
             'X': coordinates[0],
@@ -118,6 +119,7 @@ def create_entity(stats, coordinates, speed, is_player):
     else:
         entity = {
             'HP': stats[0],
+            'MAX HP': stats[0],
             'ATK': stats[1],
             'DEF': stats[2],
             'X': coordinates[0],
