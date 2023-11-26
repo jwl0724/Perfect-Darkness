@@ -124,3 +124,7 @@ def process_listen(player, monster):
     monster_location_description += ' of you. Best to avoid that place for now...'
 
     print(monster_location_description)
+
+
+def process_save(player, monster, board):
+    pass
