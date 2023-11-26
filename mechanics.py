@@ -11,9 +11,10 @@ def describe_location(player, board):
 def fight(player, monster):
     fighting = True
     valid_actions = ('attack', 'mend', 'flee', 'help', 'status')
-    print('The creature stares at you with it\'s unblinking eyes...')
 
     while fighting:
+        print('The creature stares at you with it\'s unblinking eyes...')
+
         action = helpers.enforced_input('Action: ', valid_actions)
         match action:
             case 'help':
@@ -64,4 +65,31 @@ def fight(player, monster):
                     return
                 print('You attempt to run, but the creature shrieks before you can even move, paralyzing you in fear.')
 
-        fighting = False if helpers.is_alive(player) or helpers.is_alive(monster) else True
+        monster_actions = ('attack', 'heal', 'nothing')  # 75%, 20%, 5% respectively
+        random_num = random.randint(1, 100)
+
+        if helpers.is_between(random_num, 1, 75):
+            action = monster_actions[0]
+        elif helpers.is_between(random_num, 76, 95):
+            action = monster_actions[1] if monster['HP'] != monster['MAX HP'] else monster_actions[0]
+        else:
+            action = monster_actions[2]
+
+        match action:
+            case 'attack':
+                if random.randint(1, 10) == 1:
+                    print('The creature slashes from the darkness, but you just barely managed to avoid the hit.')
+                else:
+                    player['HP'] -= math.ceil(monster['ATK'] * (1 - player['DEF'] / 100))
+                    print('The creature ambushes you from the darkness and takes a chunk of flesh from your body.')
+
+            case 'heal':
+                monster['HP'] += random.randint(1, 5)
+                if monster['HP'] > monster['MAX HP']:
+                    monster['HP'] = 50
+                print('The creature rushes into the darkness and consumes something, it must have healed...')
+
+            case 'nothing':
+                print('The creature observes you from a distance, before letting out an ear piercing screech.')
+
+        fighting = True if helpers.is_alive(player) and helpers.is_alive(monster) else False
