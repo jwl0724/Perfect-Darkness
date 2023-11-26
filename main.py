@@ -24,10 +24,15 @@ def run_game():
     building = init.make_board(rows, height, column)
 
     # start the game loop
-    mech.describe_location(player, building)
-    while mech.is_alive(player):
+    while mech.is_alive(player) and mech.is_alive(monster):
+        mech.describe_location(player, building)
+
+        # start fight if coordinates overlap
+        if (monster['X'], monster['Y'], monster['Z']) == (player['X'], player['Y'], player['Z']):
+            mech.fight(player, monster)
+
         # process input
-        while True:
+        while mech.is_alive(player):
             player_input = helpers.enforced_input('Input: ', VALID_ACTIONS)
             match player_input:
                 case 'help':
@@ -42,21 +47,25 @@ def run_game():
                     input.process_listen(player, monster)
                 case 'flash':
                     input.process_flash(player, monster)
+                case 'save':
+                    input.process_save(player, monster, building)
+                    decision = helpers.enforced_input('Quit Now? (Y/N)', ['y', 'n']) == 'y'
+                    if decision == 'y':
+                        print('Quitting now...')
+                        return
+                    else:
+                        print('Resuming game...')
+                        continue
             break
 
-        if (monster['X'], monster['Y'], monster['Z']) == (player['X'], player['Y'], player['Z']):
-            mech.fight(player, monster)
-
-        if not mech.is_alive(monster):
-            print('You have slain the decrepit creature.')
-            break
         mon.move_monster(monster, building)
 
-        if (monster['X'], monster['Y'], monster['Z']) == (player['X'], player['Y'], player['Z']):
-            mech.fight(player, monster)
-
         print(player['X'], player['Y'], player['Z'])
-        mech.describe_location(player, building)
+
+    if mech.is_alive(player):
+        print('You somehow managed to defeat the creature, unfortunately the foundation has no intention of letting you go as you have seen too much. You have only staved off your execution for just a tiny bit...')
+    elif mech.is_alive(monster):
+        print('You tried defy your fate and survive, unfortunately it was just too much for you to handle.')
 
 
 def main():
