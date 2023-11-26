@@ -75,6 +75,7 @@ def run_game():
 
         # start fight if coordinates overlap
         if (monster['X'], monster['Y'], monster['Z']) == (player['X'], player['Y'], player['Z']):
+            print('Something emerges from the darkness, you feel a sense of dread as it approaches...')
             mech.fight(player, monster)
 
         print(f'Player Coords = ({player["X"]}, {player["Y"]}, {player["Z"]})')
