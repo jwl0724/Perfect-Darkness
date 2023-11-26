@@ -24,7 +24,7 @@ def run_game():
     building = init.make_board(rows, height, column)
 
     # start the game loop
-    while mech.is_alive(player) and mech.is_alive(monster):
+    while helpers.is_alive(player) and helpers.is_alive(monster):
 
         # different description if monster on top of player
         if (monster['X'], monster['Y'], monster['Z']) == (player['X'], player['Y'], player['Z']):
@@ -39,7 +39,7 @@ def run_game():
             mon.move_monster(monster, building)
 
         # process input
-        while mech.is_alive(player):
+        while helpers.is_alive(player):
             player_input = helpers.enforced_input('Input: ', VALID_ACTIONS)
             match player_input:
                 case 'help':
@@ -76,14 +76,13 @@ def run_game():
         # start fight if coordinates overlap
         if (monster['X'], monster['Y'], monster['Z']) == (player['X'], player['Y'], player['Z']):
             mech.fight(player, monster)
-            print('Fight occurred')
 
         print(f'Player Coords = ({player["X"]}, {player["Y"]}, {player["Z"]})')
         print(f'Monster Coords = ({monster["X"]}, {monster["Y"]}, {monster["Z"]})')
 
-    if mech.is_alive(player):
+    if helpers.is_alive(player):
         print('You somehow managed to defeat the creature, unfortunately the foundation has no intention of letting you go as you have seen too much. You have only staved off your execution for just a tiny bit...')
-    elif mech.is_alive(monster):
+    elif helpers.is_alive(monster):
         print('You tried defy your fate and survive, unfortunately it was just too much for you to handle.')
 
 
