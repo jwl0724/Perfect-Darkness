@@ -1,5 +1,7 @@
 import random
 import helpers
+import json
+import os
 
 
 def process_help():
@@ -141,8 +143,32 @@ def process_listen(player, monster):
 
 
 def process_save(player, monster, board):
-    pass
+    file_num = 1
+    file_path = os.path.join(os.path.dirname(__file__), 'saves')
+    test = os.path.join(file_path, f'save-{file_num}.json')
 
+    while os.path.exists(os.path.join(file_path, f'save-{file_num}.json')):
+        file_num += 1
+
+    if not os.path.exists(file_path):
+        os.makedirs(file_path)
+    
+    with open(os.path.join(file_path, f'save-{file_num}.json'), 'w+') as save_file:
+        stringed_board = helpers.convert_dictionary(board)
+        json.dump([player, monster, stringed_board], save_file)
 
 def process_load():
-    pass
+    file_num = 1
+    file_path = os.path.join(os.path.dirname(__file__), 'saves')
+
+    while os.path.exists(os.path.join(file_path, f'save-{file_num}.json')):
+        print(f'Save #{file_num}')
+        file_num += 1
+    
+    selected_save = helpers.enforced_input('Select a save file: ', str(tuple(range(file_num))))
+
+    file_path = os.path.join(os.path.dirname(__file__), 'saves')
+    with open(os.path.join(file_path, f'save-{selected_save}.json')) as save_file:
+        save = json.load(save_file)
+        
+    return save
