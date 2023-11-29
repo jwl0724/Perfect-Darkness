@@ -5,10 +5,10 @@ def is_between(number, lower_bound, upper_bound):
         return False
 
 
-def enforced_input(input_message, valid_input_list):
+def enforced_input(input_message, valid_input_list, help_msg=True):
     player_input = input(input_message).strip().lower()
     while player_input not in valid_input_list:
-        print('Invalid input, type help for a list of valid inputs')
+        print('Invalid input, type help for a list of valid inputs') if help_msg else print('Invalid input.')
         player_input = input(input_message).strip().lower()
 
     return player_input
