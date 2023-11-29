@@ -67,6 +67,8 @@ def run_game():
                     save_state = ipt.process_load()
                     if save_state:
                         print('Now loading...')
+                        player, monster, building = save_state[0], save_state[1], helpers.convert_dictionary(save_state[2])
+                        print('Your save has been loaded.')
                     else:
                         print('Error, no saves found...')
                     continue
