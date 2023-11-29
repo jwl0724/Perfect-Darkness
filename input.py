@@ -12,6 +12,7 @@ def process_help():
                 Flash - Spend a turn to get your surroundings, also alerts the monster if it's on the same floor
                 Save - Save the current state of the game
                 Load - Load a previous save file
+                Delete - Delete a previous save file
           """)
 
 
@@ -145,7 +146,6 @@ def process_listen(player, monster):
 def process_save(player, monster, board):
     file_num = 1
     file_path = os.path.join(os.path.dirname(__file__), 'saves')
-    test = os.path.join(file_path, f'save-{file_num}.json')
 
     while os.path.exists(os.path.join(file_path, f'save-{file_num}.json')):
         file_num += 1
@@ -162,14 +162,37 @@ def process_load():
     file_num = 1
     file_path = os.path.join(os.path.dirname(__file__), 'saves')
 
-    while os.path.exists(os.path.join(file_path, f'save-{file_num}.json')):
-        print(f'Save #{file_num}')
+    if not os.path.exists(file_path):
+        return None
+
+    existing_save_numbers = []
+    while len(existing_save_numbers) != len(os.listdir(file_path)):
+        if os.path.exists(os.path.join(file_path, f'save-{file_num}.json')):
+            print(f'Save #{file_num}')
+            existing_save_numbers.append(str(file_num))
         file_num += 1
     
-    selected_save = helpers.enforced_input('Select a save file: ', str(tuple(range(file_num))))
-
-    file_path = os.path.join(os.path.dirname(__file__), 'saves')
+    selected_save = helpers.enforced_input('Select a save file: ', existing_save_numbers, False)
     with open(os.path.join(file_path, f'save-{selected_save}.json')) as save_file:
-        save = json.load(save_file)
+        save_data = json.load(save_file)
         
-    return save
+    return save_data
+
+def process_delete():
+    file_num = 1
+    file_path = os.path.join(os.path.dirname(__file__), 'saves')
+
+    if not os.path.exists(file_path):
+        return False
+    
+    existing_save_numbers = []
+    while len(existing_save_numbers) != len(os.listdir(file_path)):
+        if os.path.exists(os.path.join(file_path, f'save-{file_num}.json')):
+            print(f'Save #{file_num}')
+            existing_save_numbers.append(str(file_num))
+        file_num += 1
+    
+    selected_save = helpers.enforced_input('Select a save file: ', existing_save_numbers, False)
+    os.remove(os.path.join(file_path, f'save-{selected_save}.json'))
+
+    return True
