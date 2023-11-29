@@ -54,7 +54,7 @@ def move(entity, direction, speed=None):
 
 
 def is_alive(entity):
-    if entity['HP'] == 0:
+    if entity['HP'] <= 0:
         return False
     else:
         return True
