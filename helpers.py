@@ -58,3 +58,16 @@ def is_alive(entity):
         return False
     else:
         return True
+
+
+def convert_dictionary(board):
+    converted_dictionary = {}
+
+    if type(tuple(board.keys())[0]) == tuple:
+        for key, value in board.items():
+            converted_dictionary[str(key)] = value
+    else:
+        for key, value in board.items():
+            converted_dictionary[eval(key)] = value
+
+    return converted_dictionary
