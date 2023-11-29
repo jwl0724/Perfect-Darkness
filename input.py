@@ -36,6 +36,8 @@ def process_take(player, board):
     random_number = random.randint(1, 20)
     if random_number == 4:
         print('You tried to grab the item, but fumbled in the darkness. The item is now lost into void of darkness.')
+        new_description = 'There\'s nothing here but regret, since you fumbled grabbing the item, it\'s now lost in the darkness'
+        helpers.change_board_event(board, player_coords, 'None', new_description)
         return True
 
     # possible items: lid, bottle, knife, scissor, gun, armor
