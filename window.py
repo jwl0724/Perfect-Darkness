@@ -18,7 +18,7 @@ img = ImageTk.PhotoImage(Image.open('Images/monster_picture.jpg'))
 
 label = tk.Label(frame, image=img)
 label.pack()
-pygame.mixer.music.load('Sounds/bruh.mp3')
+pygame.mixer.music.load('Sounds/ambience_monster_alerted.mp3')
 pygame.mixer.music.play(0)
 
 window.mainloop()
