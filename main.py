@@ -15,7 +15,7 @@ def run_game():
     rows, height, column = 5, 3, 5
 
     # set constants
-    VALID_ACTIONS = ('help', 'take', 'move', 'listen', 'flash', 'save', 'load')
+    VALID_ACTIONS = ('help', 'take', 'move', 'listen', 'flash', 'save', 'load', 'delete')
 
     # initialize the game
     init.introduce_game()
@@ -45,15 +45,20 @@ def run_game():
                 case 'help':
                     ipt.process_help()
                     continue
+
                 case 'take':
                     if not ipt.process_take(player, building):
                         continue
+
                 case 'move':
                     ipt.process_move(player, monster, building)
+
                 case 'listen':
                     ipt.process_listen(player, monster)
+
                 case 'flash':
                     ipt.process_flash(player, monster)
+
                 case 'save':
                     ipt.process_save(player, monster, building)
                     decision = helpers.enforced_input('Quit Now? (Y/N): ', ['y', 'n'])
@@ -63,6 +68,7 @@ def run_game():
                     else:
                         print('Resuming game...')
                         continue
+
                 case 'load':
                     save_state = ipt.process_load()
                     if save_state:
@@ -72,7 +78,11 @@ def run_game():
                     else:
                         print('Error, no saves found...')
                     continue
-
+                
+                case 'delete':
+                    if not ipt.process_delete():
+                        print('Your save directory is empty, nothing to delete.')
+                    continue
             break
 
         # start fight if coordinates overlap
