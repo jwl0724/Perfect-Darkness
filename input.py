@@ -162,7 +162,7 @@ def process_load():
     file_num = 1
     file_path = os.path.join(os.path.dirname(__file__), 'saves')
 
-    if not os.path.exists(file_path):
+    if not os.path.exists(file_path) or not len(os.listdir(file_path)):
         return None
 
     existing_save_numbers = []
@@ -182,7 +182,7 @@ def process_delete():
     file_num = 1
     file_path = os.path.join(os.path.dirname(__file__), 'saves')
 
-    if not os.path.exists(file_path):
+    if not os.path.exists(file_path) or not len(os.listdir(file_path)):
         return False
     
     existing_save_numbers = []
