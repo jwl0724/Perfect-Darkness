@@ -10,7 +10,7 @@ def run_game():
     Run the game
     """
     # set initial variables
-    player_stats, monster_stats = (10, 1, 0), (50, 10, 10)
+    player_stats, monster_stats = (10, 1, 0), (40, 5, 10)
     player_coords, monster_coords = (2, 0, 0), (2, 2, 4)
     rows, height, column = 5, 3, 5
 
