@@ -157,6 +157,7 @@ def process_save(player, monster, board):
         stringed_board = helpers.convert_dictionary(board)
         json.dump([player, monster, stringed_board], save_file)
 
+
 def process_load():
     file_num = 1
     file_path = os.path.join(os.path.dirname(__file__), 'saves')
