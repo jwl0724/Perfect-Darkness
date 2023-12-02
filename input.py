@@ -134,7 +134,7 @@ def process_save(player, monster, board):
         json.dump([player, monster, stringed_board], save_file)
 
 
-def process_load():
+def process_load(screen):
     file_num = 1
     file_path = os.path.join(os.path.dirname(__file__), 'saves')
 
@@ -144,17 +144,19 @@ def process_load():
     existing_save_numbers = []
     while len(existing_save_numbers) != len(os.listdir(file_path)):
         if os.path.exists(os.path.join(file_path, f'save-{file_num}.json')):
-            print(f'Save #{file_num}')
             existing_save_numbers.append(str(file_num))
         file_num += 1
+
+    selected_save = pg_help.cycle_saves(screen, existing_save_numbers)
+    if not selected_save:
+        return 'canceled'
     
-    selected_save = helpers.enforced_input('Select a save file: ', existing_save_numbers, False)
     with open(os.path.join(file_path, f'save-{selected_save}.json')) as save_file:
         save_data = json.load(save_file)
-        
+
     return save_data
 
-def process_delete():
+def process_delete(screen):
     file_num = 1
     file_path = os.path.join(os.path.dirname(__file__), 'saves')
 
@@ -164,11 +166,13 @@ def process_delete():
     existing_save_numbers = []
     while len(existing_save_numbers) != len(os.listdir(file_path)):
         if os.path.exists(os.path.join(file_path, f'save-{file_num}.json')):
-            print(f'Save #{file_num}')
             existing_save_numbers.append(str(file_num))
         file_num += 1
-    
-    selected_save = helpers.enforced_input('Select a save file: ', existing_save_numbers, False)
+
+    selected_save = pg_help.cycle_saves(screen, existing_save_numbers)
+    if not selected_save:
+        return 'canceled'
+
     os.remove(os.path.join(file_path, f'save-{selected_save}.json'))
 
     return True
