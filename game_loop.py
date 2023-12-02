@@ -57,7 +57,7 @@ def run_game():
             key_pressed = pg_help.wait_for_input(overworld_inputs)
             match(key_pressed):
                 case pg.K_h:
-                    pg_help.draw_multi_line_text(screen, con.overworld_help_msg_list, size=33)
+                    pg_help.draw_multi_line_text(screen, con.overworld_help_msg_list, size=33, wait=False)
                 case pg.K_RETURN:
                     if ipt.process_take(screen, player, building):
                         break
