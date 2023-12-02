@@ -22,6 +22,18 @@ intro_msg_list = (
     'Try not to die...'
 )
 
+
+flash_help_msg_list = (
+    'Tile Legend:',
+    'Red - Monster location',
+    'Green - Your location',
+    'Grey - No special tile',
+    'Blue - Salvagable item',
+    'Yellow - Stair location',
+    'Magenta - Hole location'
+)
+
+
 overworld_help_msg_list = (
     'ENTER - Spend a turn to take an item, with a 5% chance of failing',
     'WASD - Spend a turn to move in a direction',
