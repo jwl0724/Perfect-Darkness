@@ -14,7 +14,7 @@ def draw_image(screen, image_path):
     pg.display.flip()
 
 
-def draw_one_line_text(screen, msg_list, size=60, wait=True):
+def draw_one_line_text(screen, msg_list, size=40, wait=True):
     # initialize font-style
     font = pg.font.Font('Fonts/Amatic-Bold.ttf', size)
 
@@ -27,7 +27,7 @@ def draw_one_line_text(screen, msg_list, size=60, wait=True):
         text_rect = text.get_rect()
 
         # adjust text location and draw it
-        text_rect.center = (520, 605)
+        text_rect.center = (540, 605)
         screen.blit(text, text_rect)
 
         # update screen
@@ -43,7 +43,7 @@ def draw_one_line_text(screen, msg_list, size=60, wait=True):
         text = font.render(msg, True, (255, 255, 255))
         text_rect = text.get_rect()
 
-        text_rect.center = (520, 605)
+        text_rect.center = (540, 605)
         screen.blit(text, text_rect)
 
         pg.display.flip()
@@ -63,7 +63,7 @@ def draw_multi_line_text(screen, msg_list, size=40, wait=True):
         text = font.render(msg, True, (255, 255, 255))
         text_rect = text.get_rect()
 
-        text_rect.center = (520, 520 + size / 2 + index * size)
+        text_rect.center = (540, 520 + size / 2 + index * size)
         screen.blit(text, text_rect)
 
         pg.display.flip()
