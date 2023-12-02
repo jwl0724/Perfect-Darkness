@@ -15,7 +15,7 @@ def fight(screen, valid_inputs, player, monster):
     pg_help.draw_one_line_text(screen, 'The creature stares at you with it\'s unblinking eyes...')
 
     while fighting:
-        pg_help.draw_multi_line_text(screen, con.fight_help_msg_list)
+        pg_help.draw_multi_line_text(screen, con.fight_help_msg_list, wait=False)
         key_pressed = pg_help.wait_for_input(valid_inputs)
         match key_pressed:
             case pg.K_3:
@@ -81,7 +81,7 @@ def fight(screen, valid_inputs, player, monster):
                 else:
                     player['HP'] -= math.ceil(monster['ATK'] * (1 - player['DEF'] / 100))
                     hit_msg_list = ['The creature ambushes you from the darkness', 'It takes a chunk of flesh from your body']
-                    pg_help.draw_one_line_text(hit_msg_list)
+                    pg_help.draw_one_line_text(screen, hit_msg_list)
 
             case 'heal':
                 monster['HP'] += random.randint(1, 5)
