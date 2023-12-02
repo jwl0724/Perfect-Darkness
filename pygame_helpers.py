@@ -14,7 +14,7 @@ def draw_image(screen, image_path):
     pg.display.flip()
 
 
-def draw_one_line_text(screen, msg_list, size=60, wait=False):
+def draw_one_line_text(screen, msg_list, size=60, wait=True):
     # initialize font-style
     font = pg.font.Font('Fonts/Amatic-Bold.ttf', size)
 
@@ -63,7 +63,7 @@ def draw_multi_line_text(screen, msg_list, size=40):
         text = font.render(msg, True, (255, 255, 255))
         text_rect = text.get_rect()
 
-        text_rect.center = (520, 605 + index * size)
+        text_rect.center = (520, 520 + size / 2 + index * size)
         screen.blit(text, text_rect)
 
         pg.display.flip()
@@ -80,5 +80,10 @@ def wait_for_input(valid_inputs):
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 pg.quit()
+                sys.exit()
             elif event.type == pg.KEYDOWN and event.key in valid_inputs:
                 return event.key
+
+
+def draw_map(screen, player, monster, board):
+    pass
