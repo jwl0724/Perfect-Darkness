@@ -114,7 +114,7 @@ def draw_map(screen, player, monster, board):
 
             rect_left = math.floor(25 + x * 1030 / board_row)
             rect_top = math.floor(25 + z * 470 / board_col)
-            rect_width = math.floor(1030/ board_row)
+            rect_width = math.floor(1030 / board_row)
             rect_height = math.floor(470 / board_col)
             pg.draw.rect(screen, color, pg.Rect(rect_left, rect_top, rect_width, rect_height))
             
