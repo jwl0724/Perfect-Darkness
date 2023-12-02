@@ -1,5 +1,6 @@
 import pygame as pg
 import sys
+import math
 
 def draw_windows(screen):
     pg.draw.rect(screen, (255, 255, 255), pg.Rect(20, 20, 1040, 480), 5)
@@ -87,4 +88,34 @@ def wait_for_input(valid_inputs):
 
 
 def draw_map(screen, player, monster, board):
-    pass
+    board_row = list(board.keys())[-1][0] + 1
+    board_col = list(board.keys())[-1][2] + 1
+    board_height = player['Y']
+    pg.draw.rect(screen, (0, 0, 0), pg.Rect(25, 25, 1030, 470))
+
+    for z in range(board_col):
+        for x in range(board_row):
+            coord = (x, board_height, board_col - z - 1)
+            if coord == (monster['X'], monster['Y'], monster['Z']):
+                color = (255, 12, 69)
+            elif coord  == (player['X'], player['Y'], player['Z']):
+                color = (69, 230, 69)
+            elif board[coord]['Event'] == 'None':
+                if z % 2:
+                    color = (69, 69, 69) if x % 2 else (88, 88, 88)
+                else:
+                    color = (88, 88, 88) if x % 2 else (69, 69, 69)
+            elif board[coord]['Event'] == 'Salvage':
+                color = (36, 132, 233)
+            elif board[coord]['Event'] == 'Stairs':
+                color = (255, 255, 84)
+            elif board[coord]['Event'] == 'Holes':
+                color = (255, 75, 255)
+
+            rect_left = math.floor(25 + x * 1030 / board_row)
+            rect_top = math.floor(25 + z * 470 / board_col)
+            rect_width = math.floor(1030/ board_row)
+            rect_height = math.floor(470 / board_col)
+            pg.draw.rect(screen, color, pg.Rect(rect_left, rect_top, rect_width, rect_height))
+            
+    pg.display.flip()
