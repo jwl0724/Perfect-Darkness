@@ -25,13 +25,11 @@ intro_msg_list = (
 )
 
 overworld_help_msg_list = (
-    'Take - Spend a turn to take an item, with a 5% chance of failing',
-    'Move - Spend a turn to move in a direction',
-    'Listen - Spend a turn to focus listening to estimate where the monster is',
-    'Flash - Spend a turn to get your surroundings, also alerts the monster if it\'s on the same floor',
-    'Save - Save the current state of the game',
-    'Load - Load a previous save file',
-    'Delete - Delete a previous save file'
+    'ENTER - Spend a turn to take an item, with a 5% chance of failing',
+    'WASD - Spend a turn to move in a direction',
+    'L - Spend a turn to focus listening to estimate where the monster is',
+    'F - Spend a turn to get your surroundings, also alerts the monster if it\'s on the same floor',
+    'ESC - Pause the game to save, load, or delete your saves'
 )
 
 
