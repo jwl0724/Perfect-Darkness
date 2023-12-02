@@ -9,9 +9,9 @@ import constants as con
 
 def run_game():
     # set initial variables
-    player_stats, monster_stats = (10, 1, 0), (40, 5, 10)
-    player_coords, monster_coords = (2, 0, 0), (2, 2, 4)
-    rows, height, column = 5, 3, 5
+    player_stats, monster_stats = (20, 1, 0), (100, 10, 10)
+    player_coords, monster_coords = (4, 0, 0), (2, 2, 4)
+    rows, height, column = 10, 3, 10
     game_running = True
     
     # set valid key for parts of the game
