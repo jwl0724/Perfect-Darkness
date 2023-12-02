@@ -63,6 +63,10 @@ def fight(screen, valid_inputs, player, monster):
                 fail_esc_msg_list = ['You attempted to run', 'But the creature shrieks before you can move', 'You are paralyzed in fear']
                 pg_help.draw_one_line_text(screen, fail_esc_msg_list)
 
+        if not helpers.is_alive(monster):
+            fighting = False
+            continue
+
         monster_actions = ('attack', 'heal', 'nothing')  # 75%, 20%, 5% respectively
         random_num = random.randint(1, 100)
 
