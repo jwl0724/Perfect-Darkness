@@ -77,7 +77,9 @@ def process_move(screen, player, monster, board, key_pressed):
 def process_flash(screen, player, monster, board):
     pg_help.draw_image(screen, con.flash_img)
     pg_help.draw_one_line_text(screen, 'You briefly shine your flashlight...')
-
+    pg_help.draw_one_line_text(screen, 'You quickly take in what you see within the flash')
+    pg_help.draw_map(screen, player, monster, board)
+    pg_help.draw_multi_line_text(screen, con.flash_help_msg_list, size=25)
     if monster['Y'] != player['Y']:
         pg_help.draw_one_line_text(screen, 'You see no sign of the creature, it must be on a different floor.')
         return
@@ -88,25 +90,6 @@ def process_flash(screen, player, monster, board):
     # pg_help.play_sound(con.alert_sound)
     alert_msg = 'You hear rabid snarling coming from the darkness, it seems you have alerted it to your presence.'
     pg_help.draw_one_line_text(screen, alert_msg)
-    pg_help.draw_map(screen, player, monster, board)
-
-    # pending to be removed, will print out a map with monster on the board in tkinter later
-    # x_difference = monster['X'] - player['X']
-    # z_difference = monster['Z'] - player['Z']
-    #
-    # warning_message = f'You see the malformed creature '
-    #
-    # if player['Z'] < monster['Z']:
-    #     warning_message += f'{abs(x_difference)} units north '
-    # elif player['Z'] > monster['Z']:
-    #     warning_message += f'{abs(x_difference)} units south '
-    # if player['X'] < monster['X']:
-    #     warning_message += f'{abs(z_difference)} units west '
-    # elif player['X'] > monster['X']:
-    #     warning_message += f'{abs(z_difference)} units east '
-    #
-    # warning_message += 'of you.'
-    # print(warning_message)
 
 
 def process_listen(screen, player, monster):
