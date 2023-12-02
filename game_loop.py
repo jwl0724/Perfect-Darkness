@@ -33,7 +33,7 @@ def run_game():
     # Draw the GUI and set up story
     screen.fill((0, 0, 0))
     pg_help.draw_windows(screen)
-    # pg_help.play_sound(start_sound)
+    # pg_help.play_sound(con.start_sound)
     pg_help.draw_image(screen, con.default_img)
     pg_help.draw_one_line_text(screen, con.intro_msg_list)
 
@@ -78,7 +78,7 @@ def run_game():
             pg_help.draw_one_line_text(screen, 'The creature emerges from the darkness...')
             pg_help.draw_image(screen, con.monster_img)
             # pg_help.play_sound(con.alert_sound)
-            mech.fight(player, monster)
+            mech.fight(screen, fight_inputs, player, monster)
         
     if helpers.is_alive(player):
         pg_help.draw_one_line_text(screen, con.winning_end_msg_list)
