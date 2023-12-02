@@ -33,6 +33,14 @@ overworld_help_msg_list = (
 )
 
 
+fight_help_msg_list = (
+    '1. Attack - Spend a turn to attack the enemy, with a 10% chance to miss',
+    '2. Mend - Spend a turn to heal 80% of your missing HP',
+    '3. Status - See your current health and the enemy\'s current condition',
+    '4. Flee - Spend a turn to try and run, with a 25% chance to fail'
+)
+
+
 losing_end_msg_list = (
     'You tried to defy your fate',
     'However the creature was too much for you to handle',
