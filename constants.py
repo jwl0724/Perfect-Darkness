@@ -23,6 +23,16 @@ intro_msg_list = (
 )
 
 
+pause_menu_list = (
+    'PAUSED',
+    '1. Save',
+    '2. Load',
+    '3. Delete',
+    '4. Resume',
+    '5. Quit'
+)
+
+
 flash_help_msg_list = (
     'Tile Legend:',
     'Red - Monster location',
@@ -88,5 +98,5 @@ winning_end_msg_list = (
     'To eliminate the many more anomalous entities on their behalf',
     'You have merely staved off your execution for just a tiny bit...',
     'Congratulations, You have won the game',
-    'The game now now close'
+    'The game will now close'
 )
