@@ -51,7 +51,9 @@ losing_end_msg_list = (
     'The foundation continues to condemn poor souls',
     'By sending them to their deaths within that cursed building',
     'Even though...',
-    'All they\'re doing is feeding the very thing they sought to destroy'
+    'All they\'re doing is feeding the very thing they sought to destroy',
+    'Game over...',
+    'The game will now close...'
 )
 
 
@@ -75,4 +77,6 @@ winning_end_msg_list = (
     'Hoping to send you to future missions',
     'To eliminate the many more anomalous entities on their behalf',
     'You have merely staved off your execution for just a tiny bit...'
+    'Congratulations, You have won the game',
+    'The game now now close'
 )
