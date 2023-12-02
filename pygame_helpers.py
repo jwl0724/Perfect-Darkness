@@ -119,3 +119,23 @@ def draw_map(screen, player, monster, board):
             pg.draw.rect(screen, color, pg.Rect(rect_left, rect_top, rect_width, rect_height))
             
     pg.display.flip()
+
+
+def cycle_saves(screen, save_list):
+    valid_inputs, index = [pg.K_UP, pg.K_DOWN, pg.K_RETURN, pg.K_ESCAPE], 0
+    selected_save = save_list[index]
+    while True:
+        draw_one_line_text(screen, f'Selected Save: Save-{selected_save}', wait=False)
+        key_pressed = wait_for_input(valid_inputs)
+        if key_pressed == pg.K_RETURN:
+            return selected_save
+        elif key_pressed == pg.K_DOWN:
+            index += 1
+            index = 0 if index >= len(save_list) else index
+            selected_save = save_list[index]
+        elif key_pressed == pg.K_UP:
+            index -= 1
+            index = len(save_list) - 1 if index == 0 else index     
+            selected_save = save_list[index]
+        elif key_pressed == pg.K_ESCAPE:
+            return
