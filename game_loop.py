@@ -1,5 +1,3 @@
-import pygame
-from PIL import ImageTk, Image
 import initialization as init
 import mechanics as mech
 import monster as mon
@@ -7,7 +5,7 @@ import helpers
 import input as ipt
 import pygame as pg
 import pygame_helpers as pg_help
-import descriptions as desc
+import constants as con
 
 def run_game():
     # set initial variables
@@ -15,23 +13,10 @@ def run_game():
     player_coords, monster_coords = (2, 0, 0), (2, 2, 4)
     rows, height, column = 5, 3, 5
     game_running = True
-
-    # set file image and audio file paths
-    knife_img, armor_img, bottle_img = 'Images/knife.jpg', 'Images/armor.jpg', 'Images/bottle.jpg'
-    gun_img, lid_img, scissor_img = 'Images/gun.jpg', 'Images/lid.jpg', 'Images/scissor.jpg'
-    monster_img, default_img, flash_img = 'Images/monster.jpg', 'Images/default.jpg', 'Images/flash.jpg'
-
-    intro_msg = """
-    Welcome to Perfect Darkness, you are a captured convict sent into a building under sanction. You are tasked 
-    with eliminating the creature confined within the building. The foundation has not provided any tools or weapons 
-    to help in your task, armed with nothing but your wits and flashlight, you must scour through the building to find 
-    any semblance of equipment to help you in your task. But be careful, the building is in complete darkness with no 
-    hopes of seeing the creature. You must rely on the subtle sounds the creature makes as it roams around, 
-    looking for prey within it's domain. If at any point you wish to bring up a list of commands, type help.
-    """
-
-    # set constants
-    VALID_ACTIONS = ('help', 'take', 'move', 'listen', 'flash', 'save', 'load', 'delete')
+    
+    # set valid key for parts of the game
+    overworld_inputs = [pg.K_w, pg.K_a, pg.K_s, pg.K_d, pg.K_UP, pg.K_DOWN, pg.K_l, pg.K_ESCAPE, pg.K_f, pg.K_RETURN, pg.K_h]
+    fight_inputs = [pg.K_1, pg.K_2, pg.K_3, pg.K_4]
 
     # initialize the game
     player = init.create_entity(player_stats, player_coords, 1, True)
@@ -40,20 +25,65 @@ def run_game():
 
     # initialize pygame resources
     pg.init()
+
+    # create screen
     screen = pg.display.set_mode((1080, 720))
     pg.display.set_caption('Perfect Darkness')
+
+    # Draw the GUI and set up story
     screen.fill((0, 0, 0))
     pg_help.draw_windows(screen)
-    pg_help.draw_image(screen, monster_img)
-    pg_help.draw_text(screen, desc.intro, 60)
-    pg.display.flip()
+    # pg_help.play_sound(start_sound)
+    pg_help.draw_image(screen, con.default_img)
+    pg_help.draw_one_line_text(screen, con.intro_msg_list)
 
-    while game_running:
-        event = pg.event.wait()
-        if event.type == pg.QUIT:
-            game_running = False
-        if event.type == pygame.KEYDOWN:
-            pass
+    while game_running and helpers.is_alive(player) and helpers.is_alive(monster):
+        
+        pg_help.draw_image(screen, con.default_img)
+
+        # different description if monster on top of player
+        if (monster['X'], monster['Y'], monster['Z']) == (player['X'], player['Y'], player['Z']):
+            pg_help.draw_one_line_text(screen, 'The creature is right behind you...', wait=False)
+        else:
+            pg_help.draw_one_line_text(screen, mech.describe_location(player, building), wait=False)
+
+        # move the monster depending on its state
+        if monster['Alerted']:
+            mon.chase_player(player, monster)
+        else:
+            mon.move_monster(monster, building)
+
+        while True:
+            key_pressed = pg_help.wait_for_input(overworld_inputs)
+            match(key_pressed):
+                case pg.K_h:
+                    pg_help.draw_multi_line_text(screen, con.overworld_help_msg_list, size=33)
+                case pg.K_RETURN:
+                    if ipt.process_take(screen, player, building):
+                        break
+                case pg.K_l:
+                    ipt.process_listen(screen, player, monster)
+                    break
+                case pg.K_f:
+                    ipt.process_flash(screen, player, monster, building)
+                    break
+                case pg.K_ESCAPE:
+                    pass
+                case _:
+                    if ipt.process_move(screen, player, monster, building, key_pressed):
+                        break
+                    
+        # start fight if coordinates overlap
+        if (monster['X'], monster['Y'], monster['Z']) == (player['X'], player['Y'], player['Z']):
+            pg_help.draw_one_line_text(screen, 'The creature emerges from the darkness...')
+            pg_help.draw_image(screen, con.monster_img)
+            # pg_help.play_sound(con.alert_sound)
+            mech.fight(player, monster)
+        
+    if helpers.is_alive(player):
+        pg_help.draw_one_line_text(screen, con.winning_end_msg_list)
+    elif helpers.is_alive(monster):
+        pg_help.draw_one_line_text(screen, con.losing_end_msg_list)
 
     pg.quit()
 
