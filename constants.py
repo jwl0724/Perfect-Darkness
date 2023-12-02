@@ -72,11 +72,11 @@ winning_end_msg_list = (
     'As you have seen too much for a mere tool',
     'However your efforts have not gone unacknowledged',
     'Instead of executing you then and there',
-    'The higher-ups decide you could potentially be more useful in the future',
+    'The higher-ups decide you could be an asset',
     'They decide to keep you locked up to serve as a "hunting dog"',
     'Hoping to send you to future missions',
     'To eliminate the many more anomalous entities on their behalf',
-    'You have merely staved off your execution for just a tiny bit...'
+    'You have merely staved off your execution for just a tiny bit...',
     'Congratulations, You have won the game',
     'The game now now close'
 )
