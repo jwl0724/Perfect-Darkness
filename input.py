@@ -39,6 +39,7 @@ def process_take(screen, player, board):
 
     for item in all_items:
         if item in board[player_coords]['Description']:
+            pg_help.draw_image(screen, f'Images/{item}.jpg')
             pg_help.draw_one_line_text(screen, f'You managed to grab the {item} without issue.')
             player['ATK'] += 5 if item in atk_booster else 0
             player['DEF'] += 15 if item in def_booster else 0
