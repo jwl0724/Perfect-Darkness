@@ -5,7 +5,7 @@ import helpers
 
 def describe_location(player, board):
     description = board[(player['X'], player['Y'], player['Z'])]['Description']
-    print(description)
+    return description
 
 
 def fight(player, monster):
