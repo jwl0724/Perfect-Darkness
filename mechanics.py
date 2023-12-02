@@ -47,7 +47,7 @@ def fight(screen, valid_inputs, player, monster):
 
             case pg.K_2:
                 heal_amount = math.floor((player['MAX HP'] - player['HP']) * 0.8)
-                player['HP'] += 1 if player['HP'] == 9 else heal_amount
+                player['HP'] += 1 if player['HP'] == player['MAX HP'] - 1 else heal_amount
                 if player['HP'] == player['MAX HP']:
                     fail_heal_msg = 'You try to abuse your adrenaline rush, but you failed'
                     pg_help.draw_one_line_text(screen, fail_heal_msg)
