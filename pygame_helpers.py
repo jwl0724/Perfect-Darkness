@@ -55,7 +55,7 @@ def draw_one_line_text(screen, msg_list, size=60, wait=True):
     pg.display.flip()
     
 
-def draw_multi_line_text(screen, msg_list, size=40):
+def draw_multi_line_text(screen, msg_list, size=40, wait=True):
     font = pg.font.Font('Fonts/Amatic-Bold.ttf', size)
     pg.draw.rect(screen, (0, 0, 0), pg.Rect(25, 520, 1030, 180))
 
@@ -67,6 +67,7 @@ def draw_multi_line_text(screen, msg_list, size=40):
         screen.blit(text, text_rect)
 
         pg.display.flip()
+    wait_for_input([pg.K_RETURN]) if wait == True else None
 
 
 def play_sound(file_path):
