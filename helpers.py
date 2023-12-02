@@ -1,3 +1,5 @@
+import pygame as pg
+
 def is_between(number, lower_bound, upper_bound):
     if lower_bound <= number <= upper_bound:
         return True
@@ -20,23 +22,23 @@ def change_board_event(board, coordinate, new_event, description):
 
 
 def out_of_bounds(entity, board, direction, speed=None):
-    direction_key = {'n': 1, 's': -1, 'e': 1, 'w': -1, 'up': 1, 'down': -1}
+    direction_key = {pg.K_w: 1, pg.K_s: -1, pg.K_d: 1, pg.K_a: -1, pg.K_UP: 1, pg.K_DOWN: -1}
     entity_spd = speed if speed else entity['SPD']
     board_row = list(board.keys())[-1][0]
     board_col = list(board.keys())[-1][2]
     board_height = list(board.keys())[-1][1]
 
-    if direction == 'n' or direction == 's':
+    if direction == pg.K_w or direction == pg.K_s:
         new_position = entity['Z'] + direction_key[direction] * entity_spd
         if new_position > board_col or new_position < 0:
             return True
 
-    if direction == 'e' or direction == 'w':
+    if direction == pg.K_d or direction == pg.K_a:
         new_position = entity['X'] + direction_key[direction] * entity_spd
         if new_position > board_row or new_position < 0:
             return True
 
-    if direction == 'up' or direction == 'down':
+    if direction == pg.K_UP or direction == pg.K_DOWN:
         new_position = entity['Y'] + direction_key[direction] * entity_spd
         if new_position > board_height or new_position < 0:
             return True
@@ -44,13 +46,13 @@ def out_of_bounds(entity, board, direction, speed=None):
     return False
 
 
-def move(entity, direction, speed=None):
+def move(entity, key_pressed, speed=None):
     entity_spd = speed if speed else entity['SPD']
-    direction_key = {'n': 1, 's': -1, 'e': 1, 'w': -1, 'up': 1, 'down': -1}
+    direction_key = {pg.K_w: 1, pg.K_s: -1, pg.K_d: 1, pg.K_a: -1, pg.K_UP: 1, pg.K_DOWN: -1}
 
-    entity['X'] += entity_spd * direction_key[direction] if direction == 'e' or direction == 'w' else 0
-    entity['Z'] += entity_spd * direction_key[direction] if direction == 'n' or direction == 's' else 0
-    entity['Y'] += entity_spd * direction_key[direction] if direction == 'up' or direction == 'down' else 0
+    entity['X'] += entity_spd * direction_key[key_pressed] if key_pressed == pg.K_a or key_pressed == pg.K_d else 0
+    entity['Z'] += entity_spd * direction_key[key_pressed] if key_pressed == pg.K_s or key_pressed == pg.K_w else 0
+    entity['Y'] += entity_spd * direction_key[key_pressed] if key_pressed == pg.K_UP or key_pressed == pg.K_DOWN else 0
 
 
 def is_alive(entity):
