@@ -15,6 +15,7 @@ def fight(screen, valid_inputs, player, monster):
     pg_help.draw_one_line_text(screen, 'The creature stares at you with it\'s unblinking eyes...')
 
     while fighting:
+        pg_help.play_sound(con.player_low_health_sound) if player['HP'] < math.floor(player['MAX HP'] * 0.3) else None
         pg_help.draw_multi_line_text(screen, con.fight_help_msg_list, wait=False)
         key_pressed = pg_help.wait_for_input(valid_inputs)
         match key_pressed:
@@ -42,6 +43,7 @@ def fight(screen, valid_inputs, player, monster):
                 if random.randint(1, 10) == 1:
                     pg_help.draw_one_line_text(screen, evade_msg)
                 else:
+                    pg_help.play_sound(con.player_attack_sound)
                     monster['HP'] -= math.ceil(player['ATK'] * (1 - monster['DEF'] / 100))
                     pg_help.draw_one_line_text(screen, hit_msg)
 
@@ -57,6 +59,7 @@ def fight(screen, valid_inputs, player, monster):
 
             case pg.K_4:
                 if random.randint(1, 4) != 1:
+                    pg_help.play_sound(con.player_move_chased)
                     esc_msg = 'You managed to evade the creature temporarily'
                     pg_help.draw_one_line_text(screen, esc_msg)
                     return
@@ -64,6 +67,7 @@ def fight(screen, valid_inputs, player, monster):
                 pg_help.draw_one_line_text(screen, fail_esc_msg_list)
 
         if not helpers.is_alive(monster):
+            pg_help.play_sound(con.monster_attack_sound)
             fighting = False
             continue
 
@@ -79,6 +83,7 @@ def fight(screen, valid_inputs, player, monster):
 
         match action:
             case 'attack':
+                pg_help.play_sound(con.monster_attack_sound)
                 if random.randint(1, 10) == 1:
                     miss_msg_list = ['The creature slashes from the darkness', 'You just barely avoided the hit']
                     pg_help.draw_one_line_text(screen, miss_msg_list)
@@ -88,9 +93,10 @@ def fight(screen, valid_inputs, player, monster):
                     pg_help.draw_one_line_text(screen, hit_msg_list)
 
             case 'heal':
+                pg_help.play_sound(con.monster_heal_sound)
                 monster['HP'] += random.randint(1, 5)
                 if monster['HP'] > monster['MAX HP']:
-                    monster['HP'] = 50
+                    monster['HP'] = monster['MAX HP']
                 monster_heal_msg_list = [
                     'The creature rushes into the darkness', 
                     'You hear the sound of flesh being chewed',
