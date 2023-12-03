@@ -130,10 +130,12 @@ def run_game():
         
     if helpers.is_alive(player):
         pg_help.play_sound(con.monster_death_sound)
+        pg_help.draw_image(screen, con.win_img)
         pg_help.draw_one_line_text(screen, con.winning_end_msg_list)
 
     elif helpers.is_alive(monster):
         pg_help.play_sound(con.death_sound)
+        pg_help.draw_image(screen, con.lose_img)
         pg_help.draw_one_line_text(screen, con.losing_end_msg_list)
 
     pg.quit()
