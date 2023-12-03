@@ -5,12 +5,8 @@ import pygame as pg
 import pygame_helpers as pg_help
 import constants as con
 
-def describe_location(player, board):
-    description = board[(player['X'], player['Y'], player['Z'])]['Description']
-    return description
 
-
-def fight(screen, valid_inputs, player, monster):
+def start_fight(screen, valid_inputs, player, monster):
     fighting = True
     pg_help.draw_one_line_text(screen, 'The creature stares at you with it\'s unblinking eyes...')
 
@@ -21,19 +17,20 @@ def fight(screen, valid_inputs, player, monster):
         match key_pressed:
             case pg.K_3:
                 player_stats = f'HP: {player["HP"]}/{player["MAX HP"]}, ATK: {player["ATK"]}, DEF: {player["DEF"]}'
-                
                 mon_hp = monster['HP']
+
                 match mon_hp:
                     case mon_hp if helpers.is_between(mon_hp, monster['MAX HP'] * 0.8, monster['MAX HP']):
-                        monster_condition = 'The creature appears to has taken minimal damage...'
+                        monster_condition = con.monster_condition_desc_list[0]
                     case mon_hp if helpers.is_between(mon_hp, monster['MAX HP'] * 0.6, monster['MAX HP'] * 0.8):
-                        monster_condition = 'You can hear ragged breathing emanating from the creature, it seems tired...'
+                        monster_condition = con.monster_condition_desc_list[1]
                     case mon_hp if helpers.is_between(mon_hp, monster['MAX HP'] * 0.4, monster['MAX HP'] * 0.6):
-                        monster_condition = 'The hear banshee like screeches from the creature, it must be halfway dead...'
+                        monster_condition = con.monster_condition_desc_list[2]
                     case mon_hp if helpers.is_between(mon_hp, monster['MAX HP'] * 0.2, monster['MAX HP'] * 0.4):
-                        monster_condition = 'The smell of rotting flesh and blood permeate from the creature, almost there...'
-                    case mon_hp if helpers.is_between(mon_hp, 0, monster['MAX HP'] * 0.2):
-                        monster_condition = 'Your can hear blood dripping in the darkness, the creature must be near death..'
+                        monster_condition = con.monster_condition_desc_list[3]
+                    case _:
+                        monster_condition = con.monster_condition_desc_list[4]
+
                 pg_help.draw_multi_line_text(screen, [player_stats, monster_condition])
                 continue
 
@@ -54,16 +51,23 @@ def fight(screen, valid_inputs, player, monster):
                     fail_heal_msg = 'You try to abuse your adrenaline rush, but you failed'
                     pg_help.draw_one_line_text(screen, fail_heal_msg)
                 else:
+                    pg_help.play_sound(con.player_heal_sound)
                     heal_msg = 'Your abuse your adrenaline rush, allowing you to take more hits from the creature.'
                     pg_help.draw_one_line_text(screen, heal_msg)
 
             case pg.K_4:
                 if random.randint(1, 4) != 1:
-                    pg_help.play_sound(con.player_move_chased)
+                    pg_help.play_sound(con.chased_sound)
                     esc_msg = 'You managed to evade the creature temporarily'
                     pg_help.draw_one_line_text(screen, esc_msg)
                     return
-                fail_esc_msg_list = ['You attempted to run', 'But the creature shrieks before you can move', 'You are paralyzed in fear']
+
+                fail_esc_msg_list = [
+                    'You attempt to run',
+                    'But the creature blocks your path',
+                    'You are paralyzed in fear'
+                ]
+
                 pg_help.draw_one_line_text(screen, fail_esc_msg_list)
 
         if not helpers.is_alive(monster):
@@ -89,7 +93,8 @@ def fight(screen, valid_inputs, player, monster):
                     pg_help.draw_one_line_text(screen, miss_msg_list)
                 else:
                     player['HP'] -= math.ceil(monster['ATK'] * (1 - player['DEF'] / (100 + player['DEF'])))
-                    hit_msg_list = ['The creature ambushes you from the darkness', 'It takes a chunk of flesh from your body']
+                    hit_msg_list = ['The creature ambushes you from the darkness',
+                                    'It takes a chunk of flesh from your body']
                     pg_help.draw_one_line_text(screen, hit_msg_list)
 
             case 'heal':
