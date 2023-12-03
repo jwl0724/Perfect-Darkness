@@ -11,7 +11,7 @@ import sys
 
 def run_game():
     # set initial variables
-    player_stats, monster_stats = (20, 1, 0), (100, 10, 10)
+    player_stats, monster_stats = (20, 1, 0), (200, 15, 20)
     player_coords, monster_coords = (4, 0, 0), (2, 2, 4)
     rows, height, column = 10, 3, 10
     game_running = True
@@ -36,7 +36,7 @@ def run_game():
     # Draw the GUI and set up story
     screen.fill((0, 0, 0))
     pg_help.draw_windows(screen)
-    # pg_help.play_sound(con.start_sound)
+    pg_help.play_sound(con.start_sound)
     pg_help.draw_image(screen, con.default_img)
     pg_help.draw_one_line_text(screen, con.intro_msg_list)
 
@@ -110,13 +110,21 @@ def run_game():
                     continue 
                 case _:
                     if ipt.process_move(screen, player, monster, building, key_pressed):
+                        if key_pressed == pg.K_UP:
+                            pg_help.play_sound(con.player_move_up_sound)
+                        elif key_pressed == pg.K_DOWN:
+                            pg_help.play_sound(con.player_move_down_sound)
+                        elif monster['Alerted']:
+                            pg_help.play_sound(con.player_move_chased)
+                        else:
+                            pg_help.play_sound(con.player_move_normal)
                         break
                     
         # start fight if coordinates overlap
         if (monster['X'], monster['Y'], monster['Z']) == (player['X'], player['Y'], player['Z']):
+            pg_help.play_sound(con.start_fight)
             pg_help.draw_one_line_text(screen, 'The creature emerges from the darkness...')
             pg_help.draw_image(screen, con.monster_img)
-            # pg_help.play_sound(con.alert_sound)
             mech.fight(screen, fight_inputs, player, monster)
         
     if helpers.is_alive(player):
