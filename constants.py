@@ -1,9 +1,10 @@
 monster_img, default_img, flash_img = 'Images/monster.jpg', 'Images/default.jpg', 'Images/flash.jpg'
 start_sound, death_sound, take_sound = 'Sounds/initialize_start.mp3', 'Sounds/player_death.mp3', 'Sounds/player_action_take.mp3'
-alert_sound, monster_damaged_sound = 'Sounds/ambience_monster_alerted.mp3', 'Sounds/fight_monster_damaged.mp3'
+alert_sound, monster_attack_sound = 'Sounds/ambience_monster_alerted.mp3', 'Sounds/fight_monster_attack.mp3'
 player_move_normal, player_move_chased = 'Sounds/player_move_cardinal_normal.mp3', 'Sounds/player_move_cardinal_chased.mp3'
 player_move_up_sound, player_move_down_sound = 'Sounds/player_move_up.mp3', 'Sounds/player_move_down.mp3'
 player_low_health_sound, player_attack_sound = 'Sounds/fight_player_lowhealth.mp3', 'Sounds/fight_player_attack.mp3'
+start_fight = 'Sounds/fight_encounter.mp3'
 monster_heal_sound = 'Sounds/fight_monster_heal.mp3'
 ambience_list = ['Sounds/ambience_random_1.mp3', 'Sounds/ambience_random_2.mp3', 'Sounds/ambience_random_3.mp3']
 
