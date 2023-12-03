@@ -1,102 +1,142 @@
 import initialization as init
-import mechanics as mech
+import fight
 import monster as mon
 import helpers
 import input as ipt
+import pygame as pg
+import pygame_helpers as pg_help
+import constants as con
+import sys 
 
 
 def run_game():
-    """
-    Run the game
-    """
     # set initial variables
-    player_stats, monster_stats = (10, 1, 0), (40, 5, 10)
-    player_coords, monster_coords = (2, 0, 0), (2, 2, 4)
-    rows, height, column = 5, 3, 5
-
-    # set constants
-    VALID_ACTIONS = ('help', 'take', 'move', 'listen', 'flash', 'save', 'load', 'delete')
+    player_stats, monster_stats = (20, 1, 0), (200, 15, 20)
+    player_coords, monster_coords = (4, 0, 0), (2, 2, 4)
+    rows, height, column = 10, 3, 10
+    game_running = True
+    
+    # set valid key for parts of the game
+    overworld_inputs = [pg.K_w, pg.K_a, pg.K_s, pg.K_d, pg.K_UP, pg.K_DOWN,
+                        pg.K_l, pg.K_ESCAPE, pg.K_f, pg.K_RETURN, pg.K_h]
+    fight_inputs = [pg.K_1, pg.K_2, pg.K_3, pg.K_4]
+    pause_menu_inputs = [pg.K_1, pg.K_2, pg.K_3, pg.K_4, pg.K_5]
 
     # initialize the game
-    init.introduce_game()
     player = init.create_entity(player_stats, player_coords, 1, True)
     monster = init.create_entity(monster_stats, monster_coords, 2, False)
     building = init.make_board(rows, height, column)
 
-    # start the game loop
-    while helpers.is_alive(player) and helpers.is_alive(monster):
+    # initialize pygame resources
+    pg.init()
+
+    # create screen
+    screen = pg.display.set_mode((1080, 720))
+    pg.display.set_caption('Perfect Darkness')
+
+    # Draw the GUI and set up story
+    screen.fill((0, 0, 0))
+    pg_help.draw_windows(screen)
+    pg_help.play_sound(con.start_sound)
+    pg_help.draw_image(screen, con.default_img)
+    pg_help.draw_one_line_text(screen, con.intro_msg_list)
+
+    while game_running and helpers.is_alive(player) and helpers.is_alive(monster):
+        pg_help.play_random_ambience()
+        pg_help.draw_image(screen, con.default_img)
 
         # different description if monster on top of player
         if (monster['X'], monster['Y'], monster['Z']) == (player['X'], player['Y'], player['Z']):
-            print('The creature is right behind you...')
+            pg_help.draw_one_line_text(screen, 'The creature is right behind you...', wait=False)
         else:
-            mech.describe_location(player, building)
+            pg_help.draw_one_line_text(screen, helpers.describe_location(player, building), wait=False)
 
-        # determine if monster chasing player
+        # move the monster depending on its state
         if monster['Alerted']:
             mon.chase_player(player, monster)
         else:
             mon.move_monster(monster, building)
 
-        # process input
-        while helpers.is_alive(player):
-            player_input = helpers.enforced_input('Input: ', VALID_ACTIONS)
-            match player_input:
-                case 'help':
-                    ipt.process_help()
-                    continue
+        while True:
+            key_pressed = pg_help.wait_for_input(overworld_inputs)
+            match key_pressed:
+                case pg.K_h:
+                    pg_help.draw_multi_line_text(screen, con.overworld_help_msg_list, size=33, wait=False)
+                case pg.K_RETURN:
+                    if ipt.process_take(screen, player, building):
+                        break
+                case pg.K_l:
+                    ipt.process_listen(screen, player, monster)
+                    break
+                case pg.K_f:
+                    ipt.process_flash(screen, player, monster, building)
+                    break
+                case pg.K_ESCAPE:
+                    pg_help.draw_multi_line_text(screen, con.pause_menu_list, size=28, wait=False)
+                    selected = pg_help.wait_for_input(pause_menu_inputs)
 
-                case 'take':
-                    if not ipt.process_take(player, building):
-                        continue
+                    if selected == pg.K_1:
+                        ipt.process_save(player, monster, building)
+                        pg_help.draw_one_line_text(screen, 'Game Successfully Saved...')
 
-                case 'move':
-                    ipt.process_move(player, monster, building)
+                    elif selected == pg.K_2:
+                        save_data = ipt.process_load(screen)
+                        if save_data == 'canceled':
+                            pg_help.draw_one_line_text(screen, 'Returning To Game...')
+                        elif save_data:
+                            player = save_data[0]
+                            monster = save_data[1]
+                            building = helpers.convert_dictionary(save_data[2])
+                            pg_help.draw_one_line_text(screen, 'Save File Loaded...')
+                        else:
+                            pg_help.draw_one_line_text(screen, 'No Saves Found...')
 
-                case 'listen':
-                    ipt.process_listen(player, monster)
+                    elif selected == pg.K_3:
+                        outcome = ipt.process_delete(screen)
+                        if outcome == 'canceled':
+                            pg_help.draw_one_line_text(screen, 'Delete Canceled, Returning to Game...')
+                        elif outcome:
+                            pg_help.draw_one_line_text(screen, 'Save File Deleted...')
+                        else:
+                            pg_help.draw_one_line_text(screen, 'No Saves Found...')
 
-                case 'flash':
-                    ipt.process_flash(player, monster)
+                    elif selected == pg.K_4:
+                        pg_help.draw_one_line_text(screen, 'Resuming...')
+                        
+                    elif selected == pg.K_5:
+                        pg.quit()
+                        sys.exit()
 
-                case 'save':
-                    ipt.process_save(player, monster, building)
-                    decision = helpers.enforced_input('Quit Now? (Y/N): ', ['y', 'n'])
-                    if decision == 'y':
-                        print('Quitting now...')
-                        return
-                    else:
-                        print('Resuming game...')
-                        continue
-
-                case 'load':
-                    save_state = ipt.process_load()
-                    if save_state:
-                        print('Now loading...')
-                        player, monster, building = save_state[0], save_state[1], helpers.convert_dictionary(save_state[2])
-                        print('Your save has been loaded.')
-                    else:
-                        print('Error, no saves found...')
-                    continue
-                
-                case 'delete':
-                    if not ipt.process_delete():
-                        print('Your save directory is empty, nothing to delete.')
-                    continue
-            break
-
+                    pg_help.draw_one_line_text(screen, helpers.describe_location(player, building), wait=False)
+                    continue 
+                case _:
+                    if ipt.process_move(screen, player, monster, building, key_pressed):
+                        if key_pressed == pg.K_UP:
+                            pg_help.play_sound(con.player_move_up_sound)
+                        elif key_pressed == pg.K_DOWN:
+                            pg_help.play_sound(con.player_move_down_sound)
+                        elif monster['Alerted']:
+                            pg_help.play_sound(con.chased_sound)
+                        else:
+                            pg_help.play_sound(con.move_sound)
+                        break
+                    
         # start fight if coordinates overlap
         if (monster['X'], monster['Y'], monster['Z']) == (player['X'], player['Y'], player['Z']):
-            print('Something emerges from the darkness, you feel a sense of dread as it approaches...')
-            mech.fight(player, monster)
-
-        print(f'Player Coords = ({player["X"]}, {player["Y"]}, {player["Z"]})')
-        print(f'Monster Coords = ({monster["X"]}, {monster["Y"]}, {monster["Z"]})')
-
+            pg_help.play_sound(con.start_fight_sound)
+            pg_help.draw_one_line_text(screen, 'The creature emerges from the darkness...')
+            pg_help.draw_image(screen, con.monster_img)
+            fight.start_fight(screen, fight_inputs, player, monster)
+        
     if helpers.is_alive(player):
-        print('You somehow managed to defeat the creature, unfortunately the foundation has no intention of letting you go as you have seen too much. You have only staved off your execution for just a tiny bit...')
+        pg_help.play_sound(con.monster_death_sound)
+        pg_help.draw_one_line_text(screen, con.winning_end_msg_list)
+
     elif helpers.is_alive(monster):
-        print('You tried defy your fate and survive, unfortunately it was just too much for you to handle.')
+        pg_help.play_sound(con.death_sound)
+        pg_help.draw_one_line_text(screen, con.losing_end_msg_list)
+
+    pg.quit()
 
 
 def main():
