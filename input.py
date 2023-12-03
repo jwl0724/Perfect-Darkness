@@ -80,6 +80,7 @@ def process_move(screen, player, monster, board, key_pressed):
 
 def process_flash(screen, player, monster, board):
     pg_help.draw_image(screen, con.flash_img)
+    pg_help.play_sound(con.flash_sound)
     pg_help.draw_one_line_text(screen, 'You briefly shine your flashlight...')
     pg_help.draw_one_line_text(screen, 'You quickly take in what you see within the flash')
     pg_help.draw_map(screen, player, monster, board)
