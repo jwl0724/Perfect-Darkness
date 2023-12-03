@@ -11,6 +11,7 @@ def process_take(screen, player, board):
     """
     Process taking items from board
 
+    :param screen: a pygame object that is the window of the game
     :param player: A dictionary that represents a player character
     :param board: A dictionary representing the playable area, populated with descriptions
     :precondition: player and board must be valid representations of their respective objects in the correct format
@@ -69,11 +70,13 @@ def process_move(screen, player, monster, board, key_pressed):
 
     if monster['Alerted']:
         trip_message = 'In your panic you tripped over some debris hidden in the darkness, you failed to move.'
-        helpers.move(player, key_pressed) if random.randint(1, 5) != 1 else pg_help.draw_one_line_text(screen, trip_message)
+        helpers.move(player, key_pressed) if random.randint(1, 5) != 1 else \
+            pg_help.draw_one_line_text(screen, trip_message)
     else:
         helpers.move(player, key_pressed)
 
     return True
+
 
 def process_flash(screen, player, monster, board):
     pg_help.draw_image(screen, con.flash_img)
@@ -94,14 +97,17 @@ def process_flash(screen, player, monster, board):
 
 
 def process_listen(screen, player, monster):
+    pg_help.play_sound(con.player_listen_sound)
     pg_help.draw_one_line_text(screen, 'You stop everything and focus intensely on listening to your surroundings.')
 
     # process monster on different floor as player
     if player['Y'] > monster['Y']:
-        pg_help.draw_one_line_text(screen, 'You pick up on some subtle shuffling on the floors below, the monster must be there...')
+        pg_help.draw_one_line_text(
+            screen, 'You pick up on some subtle shuffling on the floors below, the monster must be there...')
         return
     elif player['Y'] < monster['Y']:
-        pg_help.draw_one_line_text(screen, 'You pick up some faint movement on the floors above, the monster must be there...')
+        pg_help.draw_one_line_text(
+            screen, 'You pick up some faint movement on the floors above, the monster must be there...')
         return
 
     direction = ''
@@ -139,19 +145,13 @@ def process_save(player, monster, board):
 
 
 def process_load(screen):
-    file_num = 1
     file_path = os.path.join(os.path.dirname(__file__), 'saves')
 
-    if not os.path.exists(file_path) or not len(os.listdir(file_path)):
+    save_numbers = helpers.get_saves_list()
+    if not save_numbers:
         return None
 
-    existing_save_numbers = []
-    while len(existing_save_numbers) != len(os.listdir(file_path)):
-        if os.path.exists(os.path.join(file_path, f'save-{file_num}.json')):
-            existing_save_numbers.append(str(file_num))
-        file_num += 1
-
-    selected_save = pg_help.cycle_saves(screen, existing_save_numbers)
+    selected_save = pg_help.cycle_saves(screen, save_numbers)
     if not selected_save:
         return 'canceled'
     
@@ -160,20 +160,15 @@ def process_load(screen):
 
     return save_data
 
+
 def process_delete(screen):
-    file_num = 1
     file_path = os.path.join(os.path.dirname(__file__), 'saves')
 
-    if not os.path.exists(file_path) or not len(os.listdir(file_path)):
+    save_numbers = helpers.get_saves_list()
+    if not save_numbers:
         return False
-    
-    existing_save_numbers = []
-    while len(existing_save_numbers) != len(os.listdir(file_path)):
-        if os.path.exists(os.path.join(file_path, f'save-{file_num}.json')):
-            existing_save_numbers.append(str(file_num))
-        file_num += 1
 
-    selected_save = pg_help.cycle_saves(screen, existing_save_numbers)
+    selected_save = pg_help.cycle_saves(screen, save_numbers)
     if not selected_save:
         return 'canceled'
 
