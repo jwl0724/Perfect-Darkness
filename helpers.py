@@ -1,4 +1,6 @@
 import pygame as pg
+import os
+
 
 def is_between(number, lower_bound, upper_bound):
     if lower_bound <= number <= upper_bound:
@@ -62,6 +64,11 @@ def is_alive(entity):
         return True
 
 
+def describe_location(player, board):
+    description = board[(player['X'], player['Y'], player['Z'])]['Description']
+    return description
+
+
 def convert_dictionary(board):
     converted_dictionary = {}
 
@@ -73,3 +80,19 @@ def convert_dictionary(board):
             converted_dictionary[eval(key)] = value
 
     return converted_dictionary
+
+
+def get_saves_list():
+    file_num = 1
+    file_path = os.path.join(os.path.dirname(__file__), 'saves')
+
+    if not os.path.exists(file_path) or not len(os.listdir(file_path)):
+        return None
+
+    existing_save_numbers = []
+    while len(existing_save_numbers) != len(os.listdir(file_path)):
+        if os.path.exists(os.path.join(file_path, f'save-{file_num}.json')):
+            existing_save_numbers.append(str(file_num))
+        file_num += 1
+
+    return existing_save_numbers
