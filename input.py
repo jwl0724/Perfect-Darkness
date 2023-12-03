@@ -37,6 +37,7 @@ def process_take(screen, player, board):
     def_booster = ['lid', 'armor']
     all_items = atk_booster + def_booster
 
+    pg_help.play_sound(con.take_sound)
     for item in all_items:
         if item in board[player_coords]['Description']:
             pg_help.draw_image(screen, f'Images/{item}.jpg')
@@ -85,9 +86,9 @@ def process_flash(screen, player, monster, board):
         return
 
     monster['Alerted'] = True
-    monster['Alert Counter'] = 5
+    monster['Alert Counter'] = 20
     
-    # pg_help.play_sound(con.alert_sound)
+    pg_help.play_sound(con.alert_sound)
     alert_msg = 'You hear rabid snarling coming from the darkness, it seems you have alerted it to your presence.'
     pg_help.draw_one_line_text(screen, alert_msg)
 
@@ -103,18 +104,21 @@ def process_listen(screen, player, monster):
         pg_help.draw_one_line_text(screen, 'You pick up some faint movement on the floors above, the monster must be there...')
         return
 
-    monster_location_description = 'You pick up some faint sounds coming from '
+    direction = ''
 
     if player['Z'] < monster['Z']:
-        monster_location_description += 'north'
+        direction += 'north'
     elif player['Z'] > monster['Z']:
-        monster_location_description += 'south'
+        direction += 'south'
     if player['X'] < monster['X']:
-        monster_location_description += 'west'
+        direction += 'west'
     elif player['X'] > monster['X']:
-        monster_location_description += 'east'
+        direction += 'east'
 
-    monster_location_description += ' of you. Best to avoid that place for now...'
+    if direction:
+        monster_location_description = f'You pick up faint sounds coming from {direction} of you.'
+    else:
+        monster_location_description = 'It\'s right behind you...'
 
     pg_help.draw_one_line_text(screen, monster_location_description)
 
