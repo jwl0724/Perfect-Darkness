@@ -111,14 +111,6 @@ def run_game():
                     continue 
                 case _:
                     if ipt.process_move(screen, player, monster, building, key_pressed):
-                        if key_pressed == pg.K_UP:
-                            pg_help.play_sound(con.player_move_up_sound)
-                        elif key_pressed == pg.K_DOWN:
-                            pg_help.play_sound(con.player_move_down_sound)
-                        elif monster['Alerted']:
-                            pg_help.play_sound(con.chased_sound)
-                        else:
-                            pg_help.play_sound(con.move_sound)
                         break
                     
         # start fight if coordinates overlap
