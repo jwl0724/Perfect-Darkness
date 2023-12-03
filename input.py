@@ -70,9 +70,17 @@ def process_move(screen, player, monster, board, key_pressed):
 
     if monster['Alerted']:
         trip_message = 'In your panic you tripped over some debris hidden in the darkness, you failed to move.'
-        helpers.move(player, key_pressed) if random.randint(1, 5) != 1 else \
-            pg_help.draw_one_line_text(screen, trip_message)
+        random_num = random.randint(1, 5)
+        helpers.move(player, key_pressed) if random_num != 1 else pg_help.draw_one_line_text(screen, trip_message)
+        pg_help.play_sound(con.chased_sound) if random_num != 1 else None
+
     else:
+        if key_pressed == pg.K_UP:
+            pg_help.play_sound(con.player_move_up_sound)
+        elif key_pressed == pg.K_DOWN:
+            pg_help.play_sound(con.player_move_down_sound)
+        else:
+            pg_help.play_sound(con.move_sound)
         helpers.move(player, key_pressed)
 
     return True
