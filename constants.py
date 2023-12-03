@@ -1,4 +1,5 @@
 monster_img, default_img, flash_img = 'Images/monster.jpg', 'Images/default.jpg', 'Images/flash.jpg'
+win_img, lose_img = 'Images/win.jpg', 'Images/lose.jpg'
 start_sound, death_sound = 'Sounds/initialize_start.mp3', 'Sounds/player_death.mp3'
 alert_sound, monster_attack_sound = 'Sounds/ambience_monster_alerted.mp3', 'Sounds/fight_monster_attack.mp3'
 move_sound, chased_sound = 'Sounds/player_move_cardinal_normal.mp3', 'Sounds/player_move_cardinal_chased.mp3'
