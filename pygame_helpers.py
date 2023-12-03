@@ -1,6 +1,9 @@
 import pygame as pg
+import constants as con
 import sys
 import math
+import random
+
 
 def draw_windows(screen):
     pg.draw.rect(screen, (255, 255, 255), pg.Rect(20, 20, 1040, 480), 5)
@@ -19,9 +22,10 @@ def draw_one_line_text(screen, msg_list, size=40, wait=True):
     # initialize font-style
     font = pg.font.Font('Fonts/Amatic-Bold.ttf', size)
 
+    # draw console background to replace previous text
+    pg.draw.rect(screen, (0, 0, 0), pg.Rect(25, 520, 1030, 180))
+
     if type(msg_list) == str:
-        # draw console background to replace previous text
-        pg.draw.rect(screen, (0, 0, 0), pg.Rect(25, 520, 1030, 180))
 
         # render text
         text = font.render(msg_list, True, (255, 255, 255))
@@ -35,7 +39,7 @@ def draw_one_line_text(screen, msg_list, size=40, wait=True):
         pg.display.flip()
 
         # wait for enter only if specified in call
-        wait_for_input([pg.K_RETURN]) if wait == True else None
+        wait_for_input([pg.K_RETURN]) if wait is True else None
         return
     
     for msg in msg_list:
@@ -68,7 +72,7 @@ def draw_multi_line_text(screen, msg_list, size=40, wait=True):
         screen.blit(text, text_rect)
 
         pg.display.flip()
-    wait_for_input([pg.K_RETURN]) if wait == True else None
+    wait_for_input([pg.K_RETURN]) if wait is True else None
 
 
 def play_sound(file_path):
@@ -97,19 +101,19 @@ def draw_map(screen, player, monster, board):
             coord = (x, board_height, board_col - z - 1)
             if coord == (monster['X'], monster['Y'], monster['Z']):
                 color = (255, 12, 69)
-            elif coord  == (player['X'], player['Y'], player['Z']):
+            elif coord == (player['X'], player['Y'], player['Z']):
                 color = (69, 230, 69)
-            elif board[coord]['Event'] == 'None':
-                if z % 2:
-                    color = (69, 69, 69) if x % 2 else (88, 88, 88)
-                else:
-                    color = (88, 88, 88) if x % 2 else (69, 69, 69)
             elif board[coord]['Event'] == 'Salvage':
                 color = (36, 132, 233)
             elif board[coord]['Event'] == 'Stairs':
                 color = (255, 255, 84)
             elif board[coord]['Event'] == 'Hole':
                 color = (255, 75, 255)
+            else:
+                if z % 2:
+                    color = (69, 69, 69) if x % 2 else (88, 88, 88)
+                else:
+                    color = (88, 88, 88) if x % 2 else (69, 69, 69)
 
             rect_left = math.floor(25 + x * 1030 / board_row)
             rect_top = math.floor(25 + z * 470 / board_col)
@@ -138,3 +142,10 @@ def cycle_saves(screen, save_list):
             selected_save = save_list[index]
         elif key_pressed == pg.K_ESCAPE:
             return
+
+
+def play_random_ambience():
+    random_number = random.randint(1, 10)
+    if random_number == 4:
+        random_ambience_choice = random.randint(0, 2)
+        play_sound(con.ambience_list[random_ambience_choice])
