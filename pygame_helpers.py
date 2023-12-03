@@ -72,7 +72,6 @@ def draw_multi_line_text(screen, msg_list, size=40, wait=True):
 
 
 def play_sound(file_path):
-    print(file_path)
     pg.mixer.music.load(file_path)
     pg.mixer.music.play()
 
@@ -109,7 +108,7 @@ def draw_map(screen, player, monster, board):
                 color = (36, 132, 233)
             elif board[coord]['Event'] == 'Stairs':
                 color = (255, 255, 84)
-            elif board[coord]['Event'] == 'Holes':
+            elif board[coord]['Event'] == 'Hole':
                 color = (255, 75, 255)
 
             rect_left = math.floor(25 + x * 1030 / board_row)
