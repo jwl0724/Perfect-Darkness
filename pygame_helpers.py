@@ -145,7 +145,7 @@ def cycle_saves(screen, save_list):
 
 
 def play_random_ambience():
-    random_number = random.randint(1, 10)
+    random_number = random.randint(1, 7)
     if random_number == 4:
         random_ambience_choice = random.randint(0, 2)
         play_sound(con.ambience_list[random_ambience_choice])
