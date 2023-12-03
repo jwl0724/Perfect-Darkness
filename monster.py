@@ -2,6 +2,7 @@ import random
 import helpers
 import pygame as pg
 
+
 def move_monster(monster, board):
     available_keys = (pg.K_w, pg.K_s, pg.K_d, pg.K_a, pg.K_UP, pg.K_DOWN)
     monster_not_moved = True
