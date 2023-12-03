@@ -1,11 +1,12 @@
 monster_img, default_img, flash_img = 'Images/monster.jpg', 'Images/default.jpg', 'Images/flash.jpg'
-start_sound, death_sound, take_sound = 'Sounds/initialize_start.mp3', 'Sounds/player_death.mp3', 'Sounds/player_action_take.mp3'
+start_sound, death_sound = 'Sounds/initialize_start.mp3', 'Sounds/player_death.mp3'
 alert_sound, monster_attack_sound = 'Sounds/ambience_monster_alerted.mp3', 'Sounds/fight_monster_attack.mp3'
-player_move_normal, player_move_chased = 'Sounds/player_move_cardinal_normal.mp3', 'Sounds/player_move_cardinal_chased.mp3'
+move_sound, chased_sound = 'Sounds/player_move_cardinal_normal.mp3', 'Sounds/player_move_cardinal_chased.mp3'
 player_move_up_sound, player_move_down_sound = 'Sounds/player_move_up.mp3', 'Sounds/player_move_down.mp3'
 player_low_health_sound, player_attack_sound = 'Sounds/fight_player_lowhealth.mp3', 'Sounds/fight_player_attack.mp3'
-start_fight = 'Sounds/fight_encounter.mp3'
-monster_heal_sound = 'Sounds/fight_monster_heal.mp3'
+take_sound, start_fight_sound = 'Sounds/player_action_take.mp3', 'Sounds/fight_encounter.mp3'
+monster_death_sound, player_heal_sound = 'Sounds/fight_monster_death.mp3', 'Sounds/fight_player_heal.mp3'
+monster_heal_sound, player_listen_sound = 'Sounds/fight_monster_heal.mp3', 'Sounds/player_listen.mp3'
 ambience_list = ['Sounds/ambience_random_1.mp3', 'Sounds/ambience_random_2.mp3', 'Sounds/ambience_random_3.mp3']
 
 intro_msg_list = (
@@ -24,6 +25,15 @@ intro_msg_list = (
 )
 
 
+monster_condition_desc_list = (
+    'The creature appears to have taken little to no damage...',
+    'You can hear rugged breathing emanating from the creature, you must have done some damage to it...',
+    'You hear banshee like screeches within the darkness, it must be halfway dead...',
+    'The smell of rotting flesh permeates from the creature, It should be close to dead now...',
+    'You can hear the sounds of blood dripping from the creature, It\'s on it\'s last legs...'
+)
+
+
 pause_menu_list = (
     'PAUSED',
     '1. Save',
@@ -39,7 +49,7 @@ flash_help_msg_list = (
     'Red - Monster location',
     'Green - Your location',
     'Grey - No special tile',
-    'Blue - Salvagable item',
+    'Blue - Salvageable item',
     'Yellow - Stair location',
     'Magenta - Hole location'
 )
@@ -85,7 +95,7 @@ winning_end_msg_list = (
     'The stench of rotting flesh begins to permeate the building',
     'You decide it\'s time to leave the building',
     'You leave the building expecting some sort of reward',
-    'Unfortunately, all that was witing for you',
+    'Unfortunately, all that was waiting for you',
     'Was the foundation\'s armed guards holding you at gun point',
     'Despite overcoming this herculean task',
     'The foundation still views you as a disposable tool',
