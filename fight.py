@@ -138,6 +138,7 @@ def start_fight(screen: object, valid_inputs: list[pg.constants], player: dict, 
                     hit_msg_list = ['The creature ambushes you from the darkness',
                                     'It takes a chunk of flesh from your body']
                     pg_help.draw_one_line_text(screen, hit_msg_list)
+
             # process monster healing
             case 'heal':
                 # play sfx for when monster heals
