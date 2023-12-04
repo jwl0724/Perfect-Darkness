@@ -20,10 +20,10 @@ def run_game():
     game_running = True
     
     # set valid key for parts of the game
-    overworld_inputs = [pg.K_w, pg.K_a, pg.K_s, pg.K_d, pg.K_UP, pg.K_DOWN,
-                        pg.K_l, pg.K_ESCAPE, pg.K_f, pg.K_RETURN, pg.K_h]
-    fight_inputs = [pg.K_1, pg.K_2, pg.K_3, pg.K_4]
-    pause_menu_inputs = [pg.K_1, pg.K_2, pg.K_3, pg.K_4, pg.K_5]
+    overworld_inputs = (pg.K_w, pg.K_a, pg.K_s, pg.K_d, pg.K_UP, pg.K_DOWN,
+                        pg.K_l, pg.K_ESCAPE, pg.K_f, pg.K_RETURN, pg.K_h)
+    fight_inputs = (pg.K_1, pg.K_2, pg.K_3, pg.K_4)
+    pause_menu_inputs = (pg.K_1, pg.K_2, pg.K_3, pg.K_4, pg.K_5)
 
     # initialize the game
     player = init.create_entity(player_stats, player_coords, 1, True)
