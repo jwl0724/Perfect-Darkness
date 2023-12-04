@@ -2,21 +2,6 @@ import random
 import helpers
 
 
-def introduce_game():
-    print("""
-    Welcome to Perfect Darkness, you are a captured convict sent into a building under sanction. You are tasked 
-    with eliminating the creature confined within the building. The foundation has not provided any tools or weapons 
-    to help in your task, armed with nothing but your wits and flashlight, you must scour through the building to find 
-    any semblance of equipment to help you in your task. But be careful, the building is in complete darkness with no 
-    hopes of seeing the creature. You must rely on the subtle sounds the creature makes as it roams around, 
-    looking for prey within it's domain. If at any point you wish to bring up a list of commands, type help.
-    """)
-
-    print('Press enter to continue.')
-    print('-' * 10)
-    input()
-
-
 def make_board(row, height, col):
     board = {}
 
@@ -131,18 +116,3 @@ def create_entity(stats, coordinates, speed, is_player):
         }
 
     return entity
-
-
-def main():
-    introduce_game()
-    print(make_board(5, 3, 5))
-    player_stats, monster_stats = (5, 3, 2), (10, 5, 2)
-    player_coord, monster_coord = (0, 0, 0), (3, 2, 3)
-    player = create_entity(player_stats, player_coord, 1, True)
-    monster = create_entity(monster_stats, monster_coord, 2, False)
-    print(player)
-    print(monster)
-
-
-if __name__ == '__main__':
-    main()
