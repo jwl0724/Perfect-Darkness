@@ -20,8 +20,8 @@ def start_fight(screen: object, valid_inputs: list[pg.constants], player: dict, 
     :param valid_inputs: A list of pygame constants that represent the allowed keys during the fight
     :param player: A dictionary representing the player
     :param monster: A dictionary representing the monster
-    :precondition: screen must be a pygame surface object and valid inputs
-    :precondition: Valid_inputs must be a list of pygame constants that represent key presses
+    :precondition: screen must be a pygame surface object
+    :precondition: valid_inputs must be a list of pygame constants that represent key presses
     :precondition: player and monster must be dictionaries that represent a player and monster respectively
     :postcondition: The turn based fight mini-game is run
     :postcondition: Sounds will be played and text will be drawn over the window throughout the course of the fight
