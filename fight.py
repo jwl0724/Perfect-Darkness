@@ -105,7 +105,7 @@ def start_fight(screen: object, valid_inputs: list[pg.constants], player: dict, 
                 ]
                 pg_help.draw_one_line_text(screen, fail_esc_msg_list)
 
-        # check if player's attack killed the monster during their turn, play sound if if it did
+        # check if player's attack killed the monster during their turn, play sound if it did
         if not helpers.is_alive(monster):
             pg_help.play_sound(con.monster_attack_sound)
             fighting = False
@@ -147,7 +147,7 @@ def start_fight(screen: object, valid_inputs: list[pg.constants], player: dict, 
                 # generate a random healing amount between 5 and 20
                 monster['HP'] += random.randint(5, 20)
 
-                # ensure monster does not heal over it's max HP
+                # ensure monster does not heal over its max HP
                 monster['HP'] = monster['MAX HP'] if monster['HP'] > monster['MAX HP'] else monster['HP']
 
                 # draw monster healing message onto the GUI
