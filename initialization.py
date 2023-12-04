@@ -2,7 +2,21 @@ import random
 import helpers
 
 
-def make_board(row, height, col):
+def make_board(row: int, height: int, col: int) -> dict:
+    """
+    Create board
+
+    This function takes in row, height, and col parameters, and creates a dictionary that represents a 3D board with
+    length, width and height matching those of row, col, and height parameters respectively, and each coordinate on
+    the board being randomly populated with a different event type, and a randomly picked description of the location.
+
+    :param row: An integer that represents the desired length of the board
+    :param height: An integer that represents the desired width of the board
+    :param col: An integer that represents the desired height of the boardd
+    :precondition: row, height, and col must all be integers
+    :postcondition: A randomly populated dictionary representing a 3D board is created
+    :return: A dictionary that represents the playable area of the game
+    """
     board = {}
 
     possible_event_types = [
@@ -82,6 +96,9 @@ def create_entity(stats, coordinates, speed, is_player):
     """
     Create an entity on the board
 
+    This function creates an entity to be used in the game, an entity referring to either a player character,
+    or enemy characters
+
     :param stats: A tuple of integers representing stats, where indices 0, 1, 2 represent HP, ATK, DEF respectively
     :param coordinates: A tuple of integers representing coordinates, in (x, y, z) format
     :param speed: An integer representing how much steps the entity moves per turn
@@ -89,6 +106,12 @@ def create_entity(stats, coordinates, speed, is_player):
     :precondition: stats, coordinates must be in the correct format, speed can only be 1 or 2
     :postcondition: The inputted parameters are used to create a dictionary representing an entity on the board
     :return: A dictionary representing an entity is returned
+
+    >>> create_entity((69, 69, 69), (0, 0, 0), 1, True)
+    {'HP': 69, 'MAX HP': 69, 'ATK': 69, 'DEF': 69, 'X': 0, 'Y': 0, 'Z': 0, 'SPD': 1}
+
+    >>> create_entity((50, 20, 20), (0, 0, 0), 2, False)
+    {'HP': 50, 'MAX HP': 50, 'ATK': 20, 'DEF': 20, 'X': 0, 'Y': 0, 'Z': 0, 'SPD': 2, 'Alerted': False, 'Alert Counter': 0}
     """
     if is_player:
         entity = {
