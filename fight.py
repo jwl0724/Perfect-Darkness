@@ -10,7 +10,7 @@ import pygame_helpers as pg_help
 import constants as con
 
 
-def start_fight(screen: object, valid_inputs: list[pg.constants], player: dict, monster: dict) -> None:
+def start_fight(screen: object, valid_inputs: tuple[pg.constants], player: dict, monster: dict) -> None:
     """
     Run fight turn-based fight mini-game
 
