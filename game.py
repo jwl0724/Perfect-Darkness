@@ -1,3 +1,7 @@
+"""
+Jonathan Liu
+A01375621
+"""
 import initialization as init
 import fight
 import monster as mon
