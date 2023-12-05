@@ -14,7 +14,7 @@ ambience_list = ['Sounds/ambience_random_1.mp3', 'Sounds/ambience_random_2.mp3',
 
 intro_msg_list = (
     'Welcome to Perfect Darkness',
-    'You are a capture convict',
+    'You are a captured convict',
     'You are sent into a building under sanction',
     'You are tasked with eliminating a creature',
     'The foundation has not provided any assistance',
