@@ -40,16 +40,16 @@ def chase_player(player: dict, monster: dict) -> None:
     :postcondition: The monster coordinates will be moved towards the player's coordinates until they overlap
 
     >>> sample_player = {'HP': 69, 'MAX HP': 69, 'ATK': 69, 'DEF': 69, 'X': 0, 'Y': 0, 'Z': 0, 'SPD': 1}
-    >>> sample_monster = {'HP': 69, 'MAX HP': 69, 'ATK': 69, 'DEF': 69, 'X': 2, 'Y': 0, 'Z': 0, 'SPD': 2, 'Alerted': True, 'Alert Counter': 20}
+    >>> sample_monster = {'HP': 69, 'MAX HP': 69, 'ATK': 69, 'DEF': 69, 'X': 2, 'Y': 0, 'Z': 0, 'SPD': 2, 'Alerted': True, 'Alert_Counter': 20}
     >>> chase_player(sample_player, sample_monster)
     >>> sample_monster
-    {'HP': 69, 'MAX HP': 69, 'ATK': 69, 'DEF': 69, 'X': 0, 'Y': 0, 'Z': 0, 'SPD': 2, 'Alerted': True, 'Alert Counter': 19}
+    {'HP': 69, 'MAX HP': 69, 'ATK': 69, 'DEF': 69, 'X': 0, 'Y': 0, 'Z': 0, 'SPD': 2, 'Alerted': True, 'Alert_Counter': 19}
 
     >>> sample_player = {'HP': 69, 'MAX HP': 69, 'ATK': 69, 'DEF': 69, 'X': 0, 'Y': 0, 'Z': 0, 'SPD': 1}
-    >>> sample_monster = {'HP': 69, 'MAX HP': 69, 'ATK': 69, 'DEF': 69, 'X': 0, 'Y': 0, 'Z': 1, 'SPD': 2, 'Alerted': True, 'Alert Counter': 1}
+    >>> sample_monster = {'HP': 69, 'MAX HP': 69, 'ATK': 69, 'DEF': 69, 'X': 0, 'Y': 0, 'Z': 1, 'SPD': 2, 'Alerted': True, 'Alert_Counter': 1}
     >>> chase_player(sample_player, sample_monster)
     >>> sample_monster
-    {'HP': 69, 'MAX HP': 69, 'ATK': 69, 'DEF': 69, 'X': 0, 'Y': 0, 'Z': 0, 'SPD': 2, 'Alerted': False, 'Alert Counter': 0}
+    {'HP': 69, 'MAX HP': 69, 'ATK': 69, 'DEF': 69, 'X': 0, 'Y': 0, 'Z': 0, 'SPD': 2, 'Alerted': False, 'Alert_Counter': 0}
     """
     if player['X'] != monster['X']:
         direction = pg.K_d if player['X'] > monster['X'] else pg.K_a
@@ -69,6 +69,6 @@ def chase_player(player: dict, monster: dict) -> None:
         move_unit = monster['SPD'] if difference > 2 else difference
         helpers.move(monster, direction, move_unit)
 
-    monster['Alert Counter'] -= 1
-    if monster['Alert Counter'] == 0:
+    monster['Alert_Counter'] -= 1
+    if monster['Alert_Counter'] == 0:
         monster['Alerted'] = False
