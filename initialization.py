@@ -18,32 +18,33 @@ def make_board(row: int, height: int, col: int) -> dict:
     :param height: An integer that represents the desired width of the board
     :param col: An integer that represents the desired height of the board
     :precondition: row, height, and col must all be integers
+    :precondition: row and column must be integers greater than 1
     :postcondition: A randomly populated dictionary representing a 3D board is created
     :return: A dictionary that represents the playable area of the game
     """
     board = {}
 
-    possible_event_types = [
+    possible_event_types = (
         'Salvage',  # ~15%
         'None',  # ~65%
         'Stairs',  # ~10%
         'Hole'  # ~10%
-    ]
+    )
 
-    possible_salvage_event_descriptions = [
+    possible_salvage_event_descriptions = (
         'You feel out a trash can from the darkness, you think to yourself that the lid can be quite durable.',
         'You almost trip on something in the darkness, you manage to identify that it\'s a broken beer bottle.',
         'You feel out a dumpster from the darkness, inside it you managed to identify a worn out knife.',
         'You hear some trash bags settle, you decide to investigate and find worn out scissor buried inside.',
         'You feel a mound of debris under you, under all of it you find a worn out gun, perhaps it still works?',
         'You hear squishing sounds as you step, you feel flesh at your feet, but also a set of body armor.'
-    ]
+    )
 
-    possible_none_event_descriptions = [
+    possible_none_event_descriptions = (
         'There\'s nothing here.',
         'There\'s nothing to examine.',
         'You feel nothing around.',
-    ]
+    )
 
     for y in range(height):
         for z in range(col):
@@ -106,7 +107,8 @@ def create_entity(stats: tuple, coordinates: tuple, speed: int, **extra_attribut
     :param stats: A tuple of integers representing stats, where indices 0, 1, 2 represent HP, ATK, DEF respectively
     :param coordinates: A tuple of integers representing coordinates, in (x, y, z) format
     :param speed: An integer representing how much steps the entity moves per turn
-    :precondition: stats, coordinates must be in the correct format, speed can only be 1 or 2
+    :param extra_attributes: Keyword value pairs in which extra attributes can be assigned to the entity
+    :precondition: stats, coordinates must be in the correct format
     :postcondition: The inputted parameters are used to create a dictionary representing an entity on the board
     :return: A dictionary representing an entity is returned
 
