@@ -7,7 +7,7 @@ import pygame as pg
 import pygame_helpers as pg_help
 
 
-def process_take(screen: object, player: dict, board: dict) -> bool:
+def process_take(screen: pg.SurfaceType, player: dict, board: dict) -> bool:
     """
     Process taking items from board
 
@@ -70,7 +70,7 @@ def process_take(screen: object, player: dict, board: dict) -> bool:
             return True
 
 
-def process_move(screen: object, player: dict, monster: dict, board: dict, key_pressed: pg.constants) -> bool:
+def process_move(screen: pg.SurfaceType, player: dict, monster: dict, board: dict, key_pressed: int) -> bool:
     """
     Process player movement
 
@@ -126,7 +126,7 @@ def process_move(screen: object, player: dict, monster: dict, board: dict, key_p
     return True
 
 
-def process_flash(screen: object, player: dict, monster: dict, board: dict) -> None:
+def process_flash(screen: pg.SurfaceType, player: dict, monster: dict, board: dict) -> None:
     """
     Process flashlight mechanic
 
@@ -142,7 +142,7 @@ def process_flash(screen: object, player: dict, monster: dict, board: dict) -> N
     :postcondition: An image file will be drawn onto the pygame window, followed by a grid representing the map
     :postcondition: A sound file will be played during the functions process
     :postcondition: Text will be drawn onto the pygame window
-    :postcondition: Monster "Alerted" property will be set to True and "Alert Counter" set to 20 if monster is present
+    :postcondition: Monster "Alerted" property will be set to True and "Alert_Counter" set to 20 if monster is present
     """
     # draw flash, play sfx, and draw message for it
     pg_help.draw_image(screen, con.flash_img)
@@ -161,13 +161,13 @@ def process_flash(screen: object, player: dict, monster: dict, board: dict) -> N
 
     # alert the monster
     monster['Alerted'] = True
-    monster['Alert Counter'] = 20
+    monster['Alert_Counter'] = 20
     pg_help.play_sound(con.alert_sound)
     alert_msg = 'You hear rabid snarling coming from the darkness, it seems you have alerted it to your presence.'
     pg_help.draw_one_line_text(screen, alert_msg)
 
 
-def process_listen(screen: object, player: dict, monster: dict) -> None:
+def process_listen(screen: pg.SurfaceType, player: dict, monster: dict) -> None:
     """
     Process listening mechanic
 
@@ -243,7 +243,7 @@ def process_save(player: dict, monster: dict, board: dict) -> None:
         json.dump([player, monster, stringed_board], save_file)
 
 
-def process_load(screen: object) -> None | str | dict:
+def process_load(screen: pg.SurfaceType) -> None | str | dict:
     """
     Load a player's previous save
 
@@ -274,7 +274,7 @@ def process_load(screen: object) -> None | str | dict:
     return save_data
 
 
-def process_delete(screen: object) -> False | str | True:
+def process_delete(screen: pg.SurfaceType) -> False or str or True:
     """
     Delete a save file
 
