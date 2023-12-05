@@ -18,7 +18,7 @@ def make_board(row: int, height: int, col: int) -> dict:
     :param height: An integer that represents the desired width of the board
     :param col: An integer that represents the desired height of the board
     :precondition: row, height, and col must all be integers
-    :precondition: row and column must be integers greater than 1
+    :precondition: row, col, height must be integers greater than 1
     :postcondition: A randomly populated dictionary representing a 3D board is created
     :return: A dictionary that represents the playable area of the game
     """
