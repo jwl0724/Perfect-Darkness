@@ -1,6 +1,7 @@
 from unittest import TestCase
 from initialization import create_entity
 
+
 class Test(TestCase):
     def test_no_extra_attributes(self):
         result = create_entity((69, 69, 69), (0, 0, 0), 5)
