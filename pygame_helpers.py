@@ -1,3 +1,7 @@
+"""
+Jonathan Liu
+A01375621
+"""
 import pygame as pg
 import constants as con
 import sys

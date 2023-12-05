@@ -1,3 +1,7 @@
+"""
+Jonathan Liu
+A01375621
+"""
 import random
 import helpers
 
