@@ -11,6 +11,7 @@ monster_heal_sound, player_listen_sound = 'Sounds/fight_monster_heal.mp3', 'Soun
 flash_sound = 'Sounds/player_flash.mp3'
 ambience_list = ['Sounds/ambience_random_1.mp3', 'Sounds/ambience_random_2.mp3', 'Sounds/ambience_random_3.mp3']
 
+
 intro_msg_list = (
     'Welcome to Perfect Darkness',
     'You are a capture convict',
