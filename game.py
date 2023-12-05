@@ -30,8 +30,8 @@ def run_game():
     pause_menu_inputs = (pg.K_1, pg.K_2, pg.K_3, pg.K_4, pg.K_5)
 
     # initialize the game
-    player = init.create_entity(player_stats, player_coords, 1, True)
-    monster = init.create_entity(monster_stats, monster_coords, 2, False)
+    player = init.create_entity(player_stats, player_coords, 1)
+    monster = init.create_entity(monster_stats, monster_coords, 2, Alerted=False, Alert_Counter=0)
     building = init.make_board(rows, height, column)
 
     # initialize pygame resources
