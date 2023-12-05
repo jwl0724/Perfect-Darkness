@@ -60,7 +60,7 @@ def change_board_event(board: dict, coordinate: tuple, new_event: str, descripti
     board[coordinate]['Description'] = description
 
 
-def out_of_bounds(entity: dict, board: dict, direction: pg.constants, speed: int = None) -> bool:
+def out_of_bounds(entity: dict, board: dict, direction: int, speed: int = None) -> bool:
     """
     Check direction validity
 
@@ -116,7 +116,7 @@ def out_of_bounds(entity: dict, board: dict, direction: pg.constants, speed: int
     return False
 
 
-def move(entity: dict, key_pressed: pg.constants, speed=None) -> None:
+def move(entity: dict, key_pressed: int, speed=None) -> None:
     """
     Move an entity in a direction
 
@@ -240,7 +240,7 @@ def convert_dictionary(board: dict[str or tuple]) -> dict[tuple or str]:
     return converted_dictionary
 
 
-def get_saves_list() -> None | list[str]:
+def get_saves_list() -> None | list[int]:
     """
     Get save labels in the saves directory
 
@@ -249,7 +249,7 @@ def get_saves_list() -> None | list[str]:
 
     :postcondition: All numbered save labels are appended into a list
     :return: If saves directory does not exist, or directory is empty, return None, otherwise return list of integers
-    typecasted as string type, that represents the number labels of each save
+    that represents the number labels of each save
     """
     file_num = 1
     file_path = os.path.join(os.path.dirname(__file__), 'saves')
@@ -260,7 +260,7 @@ def get_saves_list() -> None | list[str]:
     existing_save_numbers = []
     while len(existing_save_numbers) != len(os.listdir(file_path)):
         if os.path.exists(os.path.join(file_path, f'save-{file_num}.json')):
-            existing_save_numbers.append(str(file_num))
+            existing_save_numbers.append(file_num)
         file_num += 1
 
     return existing_save_numbers
