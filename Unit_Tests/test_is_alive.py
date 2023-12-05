@@ -15,7 +15,7 @@ class Test(TestCase):
         expected = False
         self.assertEqual(expected, result)
 
-    def test_HP_not_0(self):
+    def test_HP_greater_than_0(self):
         sample_entity = {'HP': 69, 'MAX HP': 69, 'ATK': 69, 'DEF': 69, 'X': 0, 'Y': 0, 'Z': 0, 'SPD': 1}
         result = is_alive(sample_entity)
         expected = True
