@@ -1,3 +1,7 @@
+"""
+Jonathan Liu
+A01375621
+"""
 from unittest import TestCase
 from initialization import create_entity
 
