@@ -3,7 +3,7 @@
 
 ## Lore
 
-Perfect darkness takes place in a world where abominable creatures roam within the alleyways of urban areas. These 
+Perfect Darkness takes place in a world where abominable creatures roam within the alleyways of urban areas. These 
 creatures are difficult to dispatch, and are highly dangerous when encountered. The survival rate for such 
 encounters is a measly 1%, which is attributed to the supernatural abilities these creatures often possesses. These 
 creatures come in all shapes and sizes, some only enjoy scaring humans, others have the ability to wipe out an entire 
