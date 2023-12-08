@@ -247,7 +247,7 @@ def process_save(player: dict, monster: dict, board: dict) -> None:
         json.dump([player, monster, stringed_board], save_file)
 
 
-def process_load(screen: pg.SurfaceType) -> None | str | dict:
+def process_load(screen: pg.SurfaceType) -> dict or int:
     """
     Load a player's previous save
 
@@ -266,11 +266,11 @@ def process_load(screen: pg.SurfaceType) -> None | str | dict:
 
     save_numbers = helpers.get_saves_list()
     if not save_numbers:
-        return None
+        return 0
 
     selected_save = pg_help.cycle_saves(screen, save_numbers)
     if not selected_save:
-        return 'canceled'
+        return -1
     
     with open(os.path.join(file_path, f'save-{selected_save}.json')) as save_file:
         save_data = json.load(save_file)
@@ -278,7 +278,7 @@ def process_load(screen: pg.SurfaceType) -> None | str | dict:
     return save_data
 
 
-def process_delete(screen: pg.SurfaceType) -> False or str or True:
+def process_delete(screen: pg.SurfaceType) -> int:
     """
     Delete a save file
 
@@ -296,12 +296,12 @@ def process_delete(screen: pg.SurfaceType) -> False or str or True:
 
     save_numbers = helpers.get_saves_list()
     if not save_numbers:
-        return False
+        return 0
 
     selected_save = pg_help.cycle_saves(screen, save_numbers)
     if not selected_save:
-        return 'canceled'
+        return -1
 
     os.remove(os.path.join(file_path, f'save-{selected_save}.json'))
 
-    return True
+    return 1
