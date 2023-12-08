@@ -7,6 +7,7 @@ import constants as con
 import sys
 import math
 import random
+import itertools
 
 
 def draw_windows(screen: pg.SurfaceType) -> None:
@@ -63,10 +64,13 @@ def draw_one_line_text(screen: pg.SurfaceType, msg_list: str or list[str] or tup
     # draw console background to replace previous text
     pg.draw.rect(screen, (0, 0, 0), pg.Rect(25, 520, 1030, 180))
 
+    # set up different color prompts in which players need to press enter
+    color = (255, 255, 255) if not wait else (255, 255, 145)
+
     if type(msg_list) == str:
 
         # render text
-        text = font.render(msg_list, True, (255, 255, 255))
+        text = font.render(msg_list, True, color)
         text_rect = text.get_rect()
 
         # adjust text location and draw it
@@ -83,7 +87,7 @@ def draw_one_line_text(screen: pg.SurfaceType, msg_list: str or list[str] or tup
     for msg in msg_list:
         pg.draw.rect(screen, (0, 0, 0), pg.Rect(25, 520, 1030, 180))
 
-        text = font.render(msg, True, (255, 255, 255))
+        text = font.render(msg, True, color)
         text_rect = text.get_rect()
 
         text_rect.center = (540, 605)
@@ -180,9 +184,13 @@ def draw_map(screen: pg.SurfaceType, player: dict, monster: dict, board: dict) -
     board_height = player['Y']
     pg.draw.rect(screen, (0, 0, 0), pg.Rect(25, 25, 1030, 470))
 
+    # set up cycle of different color to print different colors
+    default_colors = itertools.cycle(((69, 69, 69), (88, 88, 88)))
+
     for z in range(board_col):
         for x in range(board_row):
             coord = (x, board_height, board_col - z - 1)
+            color = default_colors.__next__()
             if coord == (monster['X'], monster['Y'], monster['Z']):
                 color = (255, 12, 69)
             elif coord == (player['X'], player['Y'], player['Z']):
@@ -193,18 +201,15 @@ def draw_map(screen: pg.SurfaceType, player: dict, monster: dict, board: dict) -
                 color = (255, 255, 84)
             elif board[coord]['Event'] == 'Hole':
                 color = (255, 75, 255)
-            else:
-                if z % 2:
-                    color = (69, 69, 69) if x % 2 else (88, 88, 88)
-                else:
-                    color = (88, 88, 88) if x % 2 else (69, 69, 69)
 
             rect_left = math.floor(25 + x * 1030 / board_row)
             rect_top = math.floor(25 + z * 470 / board_col)
             rect_width = math.floor(1030 / board_row)
             rect_height = math.floor(470 / board_col)
             pg.draw.rect(screen, color, pg.Rect(rect_left, rect_top, rect_width, rect_height))
-            
+
+        default_colors.__next__()
+
     pg.display.flip()
 
 
