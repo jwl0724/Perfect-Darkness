@@ -9,7 +9,7 @@ take_sound, start_fight_sound = 'Sounds/player_action_take.mp3', 'Sounds/fight_e
 monster_death_sound, player_heal_sound = 'Sounds/fight_monster_death.mp3', 'Sounds/fight_player_heal.mp3'
 monster_heal_sound, player_listen_sound = 'Sounds/fight_monster_heal.mp3', 'Sounds/player_listen.mp3'
 flash_sound = 'Sounds/player_flash.mp3'
-ambience_list = ['Sounds/ambience_random_1.mp3', 'Sounds/ambience_random_2.mp3', 'Sounds/ambience_random_3.mp3']
+ambience_list = ('Sounds/ambience_random_1.mp3', 'Sounds/ambience_random_2.mp3', 'Sounds/ambience_random_3.mp3')
 
 
 intro_msg_list = (
