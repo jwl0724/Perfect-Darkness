@@ -246,7 +246,7 @@ See pygame and pygame window
 │   ├── win.jpg
 │   ├── image_darkener.py
 │   └── Unfiltered_Images
-        └── example.jpg # test file for image alteration
+│       └── example.jpg # test file for image alteration
 ├── Fonts 
 │   └── Amatic-Bold.ttf
 ├── .gitignore
