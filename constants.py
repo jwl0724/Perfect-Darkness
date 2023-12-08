@@ -13,7 +13,8 @@ ambience_list = ('Sounds/ambience_random_1.mp3', 'Sounds/ambience_random_2.mp3',
 
 
 intro_msg_list = (
-    'Welcome to Perfect Darkness',
+    'Welcome to Perfect Darkness, Press enter to continue',
+    'Any text with this color is a prompt means it is waiting for an input',
     'You are a captured convict',
     'You are sent into a building under sanction',
     'You are tasked with eliminating a creature',
