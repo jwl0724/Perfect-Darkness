@@ -13,7 +13,7 @@ import constants as con
 import sys 
 
 
-def run_game():
+def run_game() -> None:
     """
     Run the overarching game
     """
