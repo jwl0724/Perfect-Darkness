@@ -116,3 +116,145 @@ Combat Menu Keys
 3 - Check status
 4 - Flee
 ```
+
+## Requirements Checklist
+
+#### Example Cases
+
+1. Main function in file
+
+```angular2html
+game.py: line 175
+```
+2. Flowchart
+
+```angular2html
+Directory: PDFs -> flowchart.pdf
+```
+
+3. Game includes the following elements
+
+```angular2html
+a) See above | constants.py: line 15-27
+b) game.py: line 23
+c) game.py: line 21 & initialization.py: line 100
+d) input.py: line 77 -> process_move(screen, player, monster, board, key_pressed)
+e) initialization.py: line 9 -> make_board(row, height, col) # randomly generates board with events
+f) fight.py: line 13 -> start_fight(screen, valid_inputs, player, monster)
+g) game.py: line 159
+``` 
+
+4. Develop simple leveling scheme
+
+```angular2html
+a) input.py: line 14 -> process_take(screen, player, board) # taking items increases stats (line 63-64)
+b) Level Name -> constants.py: line 18 # need to actively avoid the monster to accrue items
+c) input.py: line 63-64
+d) # When enough items are accrued, confront the monster
+```
+
+5. Create a coherent, rich ecosystem of challenges
+```angular2html
+Player begins with very low stats, where monster can 2 hit kill the player. They would need to
+loot items throughout the map, while avoiding the monster and traversing in darkness.
+```
+
+6. Game ends when player dies
+```angular2html
+game.py: line 53 | line 166
+```
+
+7. Incorporate following elements
+
+```angular2html
+a) constants.py: line 15-116
+b) initialization.py: line 9 | line 100 # dictionary used for board and entities
+c) 
+d) pygame_helpers.py: line 27 | line 245 # pygame music and image reloaded when called
+e) # See game.py -> input.py ->  helpers.py
+f) # See helper functions
+g) 
+h) game.py: lines 71-148 | many more
+i) initialization.py: lines 49-75
+j) input.py: lines 58-72
+k) initialization.py: lines 49-51
+l) 
+m) monster.py: line 27
+n) # See all functions
+o) Directory: Unit_Tests folder | See all functions docstring/doctest
+p) input.py: lines 66-67
+```
+
+8. GUI for game
+
+```angular2html
+See pygame and pygame window
+```
+
+## Folder Contents
+
+```angular2html
+├── saves # save files go here
+├── Unit Tests
+│   ├── __init__.py
+│   ├── test_change_board_event.py
+│   ├── test_chase_player.py
+│   ├── test_convert_dictionary.py
+│   ├── test_create_entity.py
+│   ├── test_describe_location.py
+│   ├── test_is_alive.py
+│   ├── test_is_between.py
+│   ├── test_make_board.py
+│   ├── test_move.py
+│   └── test_out_of_bounds.py
+├── Sounds
+│   ├── ambience_monster_alert.mp3
+│   ├── ambience_random_1.mp3
+│   ├── ambience_random_2.mp3
+│   ├── ambience_random_3.mp3
+│   ├── fight_encounter.mp3
+│   ├── fight_monster_attack.mp3
+│   ├── fight_monster_death.mp3
+│   ├── fight_monster_heal.mp3
+│   ├── fight_player_attack.mp3
+│   ├── fight_player_heal.mp3
+│   ├── fight_player_lowhealth.mp3
+│   ├── initialize_start.mp3
+│   ├── player_action_take.mp3
+│   ├── player_death.mp3
+│   ├── player_flash.mp3
+│   ├── player_listen.mp3
+│   ├── player_move_cardinal_chased.mp3
+│   ├── player_move_cardinal_normal.mp3
+│   ├── player_move_down.mp3
+│   └── player_move_up.mp3
+├── PDFs
+│   ├── flowchart.pdf
+│   └── image.pdf # Aardwolf Level 10 Picture
+├── Images 
+│   ├── armor.jpg
+│   ├── bottle.jpg
+│   ├── default.jpg
+│   ├── flash.jpg
+│   ├── gun.jpg
+│   ├── icon.jpg
+│   ├── knife.jpg
+│   ├── lid.jpg
+│   ├── lose.jpg
+│   ├── monster.jpg
+│   ├── scissor.jpg
+│   └── win.jpg
+├── Fonts 
+│   └── Amatic-Bold.ttf
+├── .gitignore
+├── constants.py
+├── game.py
+├── helpers.py
+├── initialization.py
+├── input.py
+├── monster.py
+├── pygame_helpers.py
+└── README.md
+```
+
+
