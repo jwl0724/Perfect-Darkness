@@ -240,7 +240,7 @@ def convert_dictionary(board: dict[str or tuple]) -> dict[tuple or str]:
     return converted_dictionary
 
 
-def get_saves_list() -> None | list[int]:
+def get_saves_list() -> None or list[int]:
     """
     Get save labels in the saves directory
 
