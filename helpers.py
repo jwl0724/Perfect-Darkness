@@ -228,15 +228,10 @@ def convert_dictionary(board: dict[str or tuple]) -> dict[tuple or str]:
     >>> convert_dictionary(test_board)
     {(0, 0, 0): {'Event': 'None', 'Description': 'Wow'}}
     """
-    converted_dictionary = {}
-
     if type(tuple(board.keys())[0]) == tuple:
-        for key, value in board.items():
-            converted_dictionary[str(key)] = value
+        converted_dictionary = {str(key): value for key, value in board.items()}
     else:
-        for key, value in board.items():
-            converted_dictionary[eval(key)] = value
-
+        converted_dictionary = {eval(key): value for key, value in board.items()}
     return converted_dictionary
 
 
