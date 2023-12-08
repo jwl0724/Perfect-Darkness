@@ -169,16 +169,16 @@ game.py: line 53 | line 166
 ```angular2html
 a) constants.py: line 15-116
 b) initialization.py: line 9 | line 100 # dictionary used for board and entities
-c) 
-d) pygame_helpers.py: line 27 | line 245 # pygame music and image reloaded when called
+c) helpers.py: line 204-207 # in case player somehow manages to bypass the out of bounds check already in place
+d) # See lack of global variables
 e) # See game.py -> input.py ->  helpers.py
 f) # See helper functions
-g) 
+g) helpers.py: lines 232, 234 # dictionary comprehension
 h) game.py: lines 71-148 | many more
 i) initialization.py: lines 49-75
 j) input.py: lines 58-72
 k) initialization.py: lines 49-51
-l) 
+l) pygame_helpers.py: line 188
 m) monster.py: line 27
 n) # See all functions
 o) Directory: Unit_Tests folder | See all functions docstring/doctest
