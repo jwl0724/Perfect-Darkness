@@ -204,7 +204,7 @@ def describe_location(player: dict, board: dict) -> str:
     try:
         description = board[(player['X'], player['Y'], player['Z'])]['Description']
     except KeyError:
-        description = 'What did you do... You\'re not supposed to out here. Quit the game NOW!'
+        description = 'What did you do... You\'re not supposed to out here. Turn back NOW!'
     return description
 
 
