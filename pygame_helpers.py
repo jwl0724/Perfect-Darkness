@@ -42,7 +42,7 @@ def draw_image(screen: pg.SurfaceType, image_path: str) -> None:
     pg.display.flip()
 
 
-def draw_one_line_text(screen: pg.SurfaceType, msg_list: str | list[str] | tuple[str], size=40, wait=True) -> None:
+def draw_one_line_text(screen: pg.SurfaceType, msg_list: str or list[str] or tuple[str], size=40, wait=True) -> None:
     """
     Draw text onto game window one line at a time
 
@@ -208,7 +208,7 @@ def draw_map(screen: pg.SurfaceType, player: dict, monster: dict, board: dict) -
     pg.display.flip()
 
 
-def cycle_saves(screen: pg.SurfaceType, save_list: list[int]) -> int | None:
+def cycle_saves(screen: pg.SurfaceType, save_list: list[int]) -> int or None:
     """
     Cycle through save files
 
