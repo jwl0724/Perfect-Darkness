@@ -244,7 +244,7 @@ def process_save(player: dict, monster: dict, board: dict) -> None:
     
     with open(os.path.join(file_path, f'save-{file_num}.json'), 'w+') as save_file:
         stringed_board = helpers.convert_dictionary(board)
-        json.dump([player, monster, stringed_board], save_file)
+        json.dump([player, monster, stringed_board], save_file, indent=4)
 
 
 def process_load(screen: pg.SurfaceType) -> dict or int:
