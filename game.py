@@ -104,7 +104,7 @@ def run_game() -> None:
                     elif selected == pg.K_2:
                         save_data = ipt.process_load(screen)
                         # do nothing when escape is pressed when selecting a save
-                        if save_data == 'canceled':
+                        if save_data == -1:
                             pg_help.draw_one_line_text(screen, 'Returning To Game...')
                         # load the save data
                         elif save_data:
@@ -120,7 +120,7 @@ def run_game() -> None:
                     elif selected == pg.K_3:
                         outcome = ipt.process_delete(screen)
                         # do nothing when escape is pressed when selecting a save to delete
-                        if outcome == 'canceled':
+                        if outcome == -1:
                             pg_help.draw_one_line_text(screen, 'Delete Canceled, Returning to Game...')
                         # print a message saying that the save file has been deleted
                         elif outcome:
