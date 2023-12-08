@@ -243,7 +243,10 @@ See pygame and pygame window
 │   ├── lose.jpg
 │   ├── monster.jpg
 │   ├── scissor.jpg
-│   └── win.jpg
+│   ├── win.jpg
+│   ├── image_darkener.py
+│   └── Unfiltered_Images
+        └── example.jpg # test file for image alteration
 ├── Fonts 
 │   └── Amatic-Bold.ttf
 ├── .gitignore
