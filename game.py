@@ -21,7 +21,6 @@ def run_game() -> None:
     player_stats, monster_stats = (20, 1, 0), (200, 15, 20)
     player_coords, monster_coords = (4, 0, 0), (2, 2, 4)
     rows, height, column = 10, 3, 10
-    game_running = True
     
     # set valid key for parts of the game
     overworld_inputs = (pg.K_w, pg.K_a, pg.K_s, pg.K_d, pg.K_UP, pg.K_DOWN,
@@ -50,7 +49,7 @@ def run_game() -> None:
     pg_help.draw_image(screen, con.default_img)
     pg_help.draw_one_line_text(screen, con.intro_msg_list)
 
-    while game_running and helpers.is_alive(player) and helpers.is_alive(monster):
+    while helpers.is_alive(player) and helpers.is_alive(monster):
         # play sound ambience sound and draw the default darkness image
         pg_help.play_random_ambience()
         pg_help.draw_image(screen, con.default_img)
