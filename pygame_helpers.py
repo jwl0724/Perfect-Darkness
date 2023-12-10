@@ -237,15 +237,20 @@ def cycle_saves(screen: pg.SurfaceType, save_list: list[int]) -> int or None:
             return selected_save
         elif key_pressed == pg.K_DOWN:
             index += 1
-            index = 0 if index >= len(save_list) else index
-            selected_save = save_list[index]
+            try:
+                selected_save = save_list[index]
+            except IndexError:
+                index = 0
+                selected_save = save_list[index]
+
         elif key_pressed == pg.K_UP:
             index -= 1
-            index = len(save_list) - 1 if index == 0 else index     
+            index = len(save_list) - 1 if index < 0 else index
             selected_save = save_list[index]
+
         elif key_pressed == pg.K_ESCAPE:
             return
-
+        print(index)
 
 def play_random_ambience() -> None:
     """
