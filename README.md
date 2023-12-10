@@ -119,77 +119,21 @@ Combat Menu Keys
 
 ## Requirements Checklist
 
-#### Example Cases
-
-1. Main function in file
-
-```angular2html
-game.py: line 175
-```
-2. Flowchart
-
-```angular2html
-Directory: PDFs -> flowchart.pdf
-```
-
-3. Game includes the following elements
-
-```angular2html
-a) See above | constants.py: line 15-27
-b) game.py: line 23
-c) game.py: line 21 & initialization.py: line 100
-d) input.py: line 77 -> process_move(screen, player, monster, board, key_pressed)
-e) initialization.py: line 9 -> make_board(row, height, col) # randomly generates board with events
-f) fight.py: line 13 -> start_fight(screen, valid_inputs, player, monster)
-g) game.py: line 159
-``` 
-
-4. Develop simple leveling scheme
-
-```angular2html
-a) input.py: line 14 -> process_take(screen, player, board) # taking items increases stats (line 63-64)
-b) Level Name -> constants.py: line 18 # need to actively avoid the monster to accrue items
-c) input.py: line 63-64
-d) # When enough items are accrued, confront the monster
-```
-
-5. Create a coherent, rich ecosystem of challenges
-```angular2html
-Player begins with very low stats, where monster can 2 hit kill the player. They would need to
-loot items throughout the map, while avoiding the monster and traversing in darkness.
-```
-
-6. Game ends when player dies
-```angular2html
-game.py: line 53 | line 166
-```
-
-7. Incorporate following elements
-
-```angular2html
-a) constants.py: line 15-116
-b) initialization.py: line 9 | line 100 # dictionary used for board and entities
-c) helpers.py: line 204-207 # in case player somehow manages to bypass the out of bounds check already in place
-d) # See lack of global variables
-e) # See game.py -> input.py ->  helpers.py
-f) # See helper functions
-g) helpers.py: lines 232, 234 # dictionary comprehension
-h) game.py: lines 71-148 | many more
-i) initialization.py: lines 49-75
-j) input.py: lines 58-72
-k) initialization.py: lines 49-51
-l) pygame_helpers.py: line 188
-m) monster.py: line 27
-n) # See all functions
-o) Directory: Unit_Tests folder | See all functions docstring/doctest
-p) input.py: lines 66-67
-```
-
-8. GUI for game
-
-```angular2html
-See pygame and pygame window
-```
+| Python Elements               |              One Example Case              |
+|-------------------------------|:------------------------------------------:| 
+| Immutable data structures     |         constants.py, lines 15-29          |
+| Mutable data structures       |             initialization.py              |   
+| Exception handling            |         helpers.py, lines 204-207          |
+| List/Dictionary comprehension |         helpers.py, lines 235, 237         | 
+| Selection using if-statements |           game.py, lines 99-139            | 
+| Repetition using loops        |       initialization.py, lines 49-75       | 
+| Membership operator           |           inputs.py, lines 58-72           | 
+| Range function                |         initialization.py, line 49         | 
+| Itertool function usage       |        pygame_helpers.py, line 188         | 
+| Random module                 |            monster.py, line 27             | 
+| Function annotations          |             See all functions              | 
+| Doctests and Unit Tests       | See all functions and Unit_Tests directory | 
+| F-string formatting           |             input.py, line 66              |
 
 ## Folder Contents
 
