@@ -257,8 +257,8 @@ def process_load(screen: pg.SurfaceType) -> dict or int:
     :param screen: A pygame surface object that represents the game window
     :precondition: screen must be a valid pygame surface object that represents the game window
     :postcondition: The selected save data will be read and retrieved
-    :return: None is returned if no saves were found or if the saves directory does not exist
-    :return: The string 'canceled' is returned if the user presses the escape key while cycling through saves
+    :return: Return the int 0 if no saves was found or the directory does not exist
+    :return: Return the int -1 if the player cancels selecting a save
     :return: A list containing dictionaries representing the player, monster, and board with stringed keys is
     returned if save files were found and selected
     """
@@ -288,9 +288,9 @@ def process_delete(screen: pg.SurfaceType) -> int:
     :param screen: A pygame surface object that represents the game window
     :precondition: screen must be a valid pygame surface object that represents the game window
     :postcondition: The selected save file will be deleted from the saves directory
-    :return: boolean False is returned if no save files were found, or if the saves directory does not exist
-    :return: boolean True is returned if a save file was found and was deleted from the directory.
-    :return: The string 'canceled' is returned if the player presses escape while cycling through save files
+    :return: Returns the int 0 if no saves were found or the save directory does not exist
+    :return: Returns the int 1 if the save was found and successfully deleted
+    :return: Returns the string -1 if the player cancels the process of selecting a save
     """
     file_path = os.path.join(os.path.dirname(__file__), 'saves')
 
