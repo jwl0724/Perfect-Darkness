@@ -250,7 +250,7 @@ def cycle_saves(screen: pg.SurfaceType, save_list: list[int]) -> int or None:
 
         elif key_pressed == pg.K_ESCAPE:
             return
-        print(index)
+
 
 def play_random_ambience() -> None:
     """
