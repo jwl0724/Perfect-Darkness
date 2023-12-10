@@ -44,7 +44,6 @@ def darken(img, pixels, darken_factor: float) -> None:
     :precondition: All parameters must be the correct types
     :postcondition: All pixels within the given image will be darkened
     """
-    print(pixels)
     for x_coord in range(img.size[0]):
         for y_coord in range(img.size[1]):
             new_pixels = tuple([int(num * darken_factor) for num in pixels[x_coord, y_coord]])
