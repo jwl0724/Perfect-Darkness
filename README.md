@@ -1,5 +1,4 @@
 # Perfect Darkness - 1510 Term Project
-<sup>Jonathan Liu (Set F) - A01375621</sup>
 
 ## Lore
 
